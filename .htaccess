@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteRule ^(.*/)?\.git/ - [F,L]
+    RewriteRule ^(.*/)?include/ - [F,L]
+    RewriteRule ^(.*/)?template/.+\.php$ - [F,L]
+    
+    # Rewrite current-style URLs of the form 'index.php?q=x'.
+    RewriteCond %{REQUEST_FILENAME} !-f 
+    RewriteCond %{REQUEST_FILENAME} !-d 
+    RewriteRule ^(.*)$ index.php?q=$1 [L,QSA]
+</IfModule>

@@ -1,0 +1,87 @@
+h1 {
+    text-align:center;
+}
+
+h2 {
+    padding:0;
+    margin:0;
+}
+
+ul.breadcrumbs {
+    list-style:none;
+    text-align:center;
+    margin:0 auto;
+}
+ul.breadcrumbs li {
+    display:inline;
+    margin:0 1em;
+}
+
+div.comic {
+    width:50%;
+    /*margin:0 auto;*/
+    margin-left:150px;
+    text-align:center;
+}
+ul.nav {
+    padding:0;
+    margin:0;
+}
+ul.nav li {
+    list-style:none;
+    display:inline-block;
+    padding:1ex 1ex 0;
+}
+
+div.description {
+    background:#eee;
+    border:1px solid #ccc;
+    padding:1em;
+    text-align:left;
+}
+
+div.navmenu {
+    position:absolute;
+    top:40px;
+    left:10px;
+    width:135px;
+}
+div.navmenu ul {
+    padding-left:0;
+    list-style:none;
+}
+
+div.recently {
+    position:absolute;
+    top:40px;
+    right:10px;
+    width:
+}
+div.recently ul {
+    padding-left:0;
+    list-style:none;
+}
+
+pre.debug {
+    background:#ccc;
+    border:1px solid black;
+    padding:1em;
+}
+
+label {
+    display:block;
+    float:left;
+}
+input, select, textarea, small {
+    display:block;
+    margin-left:10em;
+}
+
+div.foot {
+    margin-top:2em;
+    text-align:center;
+}
+div.foot a {
+    color:#ccc;
+    text-decoration:none;
+}
