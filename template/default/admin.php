@@ -1,5 +1,4 @@
 <?php template('head'); ?>
-
 <h3>Comics</h3>
 <ul>
 <?php
@@ -47,5 +46,4 @@ foreach($chapters as $c) {
 }
 ?>
 </ul>
-
 <?php template('foot'); ?>

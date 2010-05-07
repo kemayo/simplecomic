@@ -1,3 +1,4 @@
+</div>
 <div class="navmenu">
     <ul>
         <li><a href="<?php echo BASEURL ?>/chapters/">Chapters</li>

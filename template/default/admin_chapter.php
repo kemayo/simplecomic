@@ -1,5 +1,4 @@
 <?php template('head'); ?>
-
 <form action="" method="POST" enctype="multipart/form-data">
     <?php if(isset($chapterid) && $chapterid && $chapterid != 'new') { ?>
         <input name="chapterid" value=<?php echo $chapterid; ?> type="hidden" />

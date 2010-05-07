@@ -29,3 +29,4 @@ available variables:
     echo '</li>';
 } ?></ul>
 <?php } ?>
+<div class="maincontent">

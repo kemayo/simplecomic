@@ -17,10 +17,12 @@ ul.breadcrumbs li {
     margin:0 1em;
 }
 
-div.comic {
+div.maincontent {
     width:50%;
     /*margin:0 auto;*/
     margin-left:150px;
+}
+div.comic {
     text-align:center;
 }
 ul.nav {
