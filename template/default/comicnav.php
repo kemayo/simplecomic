@@ -13,25 +13,25 @@ Available variables:
 <ul class="nav">
 <?php
 if($first != $current) {
-    echo '<li><a href="'.BASEURL.'/comic/'.$first.'">First</a></li>';
+    echo '<li><a href="', url('/comic/'.$first), '">First</a></li>';
 } else {
     echo '<li>First</li>';
 }
 
 if($prev) {
-    echo '<li><a href="'.BASEURL.'/comic/'.$prev.'">Prev</a></li>';
+    echo '<li><a href="', url('/comic/'.$prev), '">Prev</a></li>';
 } else {
     echo '<li>Prev</li>';
 }
 
 if($next) {
-    echo '<li><a href="'.BASEURL.'/comic/'.$next.'">Next</a></li>';
+    echo '<li><a href="', url('/comic/'.$next), '">Next</a></li>';
 } else {
     echo '<li>Next</li>';
 }
 
 if($last && $last != $current) {
-    echo '<li><a href="'.BASEURL.'/comic/'.$last.'">Latest</a></li>';
+    echo '<li><a href="', url('/comic/'.$last), '">Latest</a></li>';
 } else {
     echo '<li>Latest</li>';
 }

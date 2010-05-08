@@ -36,10 +36,24 @@ function template($name, $vars = false) {
     }
 }
 
-function redirect($where) {
-    if(!preg_match("/^[^:]+:\/\//", $where)) {
-        $where = BASEURL . $where;
+function url($url, $absolute = false) {
+    global $config;
+    if(preg_match("/^[^:]+:\/\//", $url)) {
+        // external link
+        return $url;
     }
+    $beginning = ($absolute ? current_domain() : '') . BASEURL;
+    if(!$url || $url == '/') {
+        return $beginning;
+    }
+    if($config['pretty_urls']) {
+        return  $beginning . $url;
+    }
+    return $beginning . "/index.php?q=" . $url;
+}
+
+function redirect($where) {
+    $where = url($where);
     ob_end_clean();
     if(DEBUG) {
         echo '<p>Redirect to: <a href="', $where, '">', $where, '</a></p>';

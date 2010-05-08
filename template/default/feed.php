@@ -25,11 +25,11 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
         switch($update['type']) {
             case 'comic':
                 $type = "Comic";
-                $urlbase = BASEURL . '/comic/';
+                $urlbase = url('/comic/');
                 break;
             case 'rant':
                 $type = "Rant";
-                $urlbase = BASEURL . '/rant/';
+                $urlbase = url('/rant/');
                 break;
         }
         if(!$urlbase) {
@@ -43,7 +43,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
             <title><![CDATA[<?=$type . ': ' . $update['title']?>]]></title>
             <author>
                 <name><![CDATA[<?=$config['author'];?>]]></name>
-                <uri><?=$config['author_url'] ? $config['author_url']: (current_url() . BASEURL);?></uri>
+                <uri><?=$config['author_url'] ? $config['author_url'] : url('/', true);?></uri>
             </author>
             <published><?=date('c', $update['pub_date']);?></published>
             <updated><?=date('c', $update['pub_date']);?></updated>

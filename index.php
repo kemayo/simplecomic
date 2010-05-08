@@ -8,8 +8,8 @@ require_once 'include/db.php';
 require_once 'include/common.php';
 require_once 'include/config.php';
 
-$request = isset($_REQUEST['q']) ? $_REQUEST['q'] : 'index';
-$request = array_filter(explode('/', $request));
+$request = isset($_REQUEST['q']) && $_REQUEST['q'] && $_REQUEST['q'] != '/' ? $_REQUEST['q'] : 'index';
+$request = array_values(array_filter(explode('/', $request)));
 
 $page = array(
     'title' => $config['title'],

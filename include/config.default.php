@@ -10,6 +10,7 @@ $config = array(
     'comicpath' => "/comics",
     'template' => "default",
     'full_feed' => true, // means that comic images and rants appear in the feed
+    'pretty_urls' => true,
     'adminuser' => "admin",
     'adminpass' => "admin",
 );

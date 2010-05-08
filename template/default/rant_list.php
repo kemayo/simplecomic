@@ -11,7 +11,7 @@ template('head');
     <?php if($rants) { ?>
     <ul>
         <?php foreach($rants as $rant) { ?>
-        <li><a href="<?php echo BASEURL, '/rant/', $rant['rantid']; ?>"><?php echo $rant['title'] ?></a></li>
+        <li><a href="<?php echo url('/rant/'.$rant['rantid']); ?>"><?php echo $rant['title'] ?></a></li>
         <?php } ?>
     </ul>
     <?php } else { ?>
