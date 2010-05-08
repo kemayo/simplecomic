@@ -5,7 +5,7 @@
 `pub_date` INT NOT NULL ,
 `chapterid` INT NOT NULL ,
 INDEX `bychapter` ( `chapterid` , `pub_date` ) ,
-INDEX `bydate` ( `pub_date` ) ,
+INDEX `bydate` ( `pub_date` )
 ) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_general_ci;
 
  CREATE TABLE  `simplecomic`.`comics_text` (
