@@ -66,6 +66,7 @@ switch($request[0]) {
                     // Suggest default filename?
                     // header('Content-Disposition: filename=' . urlencode($comic['filename']));
                     readfile($file);
+                    die;
                 }
             }
             header('HTTP/1.1 404 Not Found');
@@ -140,6 +141,11 @@ switch($request[0]) {
         }
         $page['breadcrumbs'][] = array("Admin", "/admin/");
         require 'include/admin.php';
+        break;
+    case 'feed':
+        template('feed', array(
+            'updates' => fetch_recent_updates(true),
+        ));
         break;
     default:
         // 404

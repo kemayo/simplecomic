@@ -11,6 +11,7 @@ available variables:
 <head>
 <title><?php echo $page['title']; ?></title>
 <link rel="stylesheet" href="<?php echo BASEURL; ?>/template/<?php echo $config['template']; ?>/style.css" type="text/css" />
+<link rel="alternate" type="application/atom+xml" title="<?php echo $config['sitename']?> updates" href="<?php echo BASEURL?>/feed" />
 </head>
 <body>
 <h1>

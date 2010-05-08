@@ -90,14 +90,19 @@ function fetch_text($comicid) {
     return $text;
 }
 
-function fetch_recent_updates() {
+function fetch_recent_updates($text = false, $count = 5) {
     global $db;
-    $rants = $db->fetch("SELECT 'rant' as type, rantid AS id, title, pub_date FROM rants WHERE pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date DESC LIMIT 5");
-    $comics = $db->fetch("SELECT 'comic' as type, comicid AS id, title, pub_date FROM comics WHERE pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date DESC LIMIT 5");
+    if($text) {
+        $rants = $db->fetch("SELECT 'rant' as type, r.rantid AS id, r.title, r.pub_date, t.text FROM rants r LEFT JOIN rants_text t ON r.rantid = t.rantid WHERE r.pub_date <= UNIX_TIMESTAMP() ORDER BY r.pub_date DESC LIMIT 5");
+        $comics = $db->fetch("SELECT 'comic' as type, c.comicid AS id, c.title, c.pub_date, t.description, t.alt_text FROM comics c LEFT JOIN comics_text t ON c.comicid = t.comicid WHERE c.pub_date <= UNIX_TIMESTAMP() ORDER BY c.pub_date DESC LIMIT 5");
+    } else {
+        $rants = $db->fetch("SELECT 'rant' as type, rantid AS id, title, pub_date FROM rants WHERE pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date DESC LIMIT 5");
+        $comics = $db->fetch("SELECT 'comic' as type, comicid AS id, title, pub_date FROM comics WHERE pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date DESC LIMIT 5");
+    }
     $updates = array_merge($rants, $comics);
     uasort($updates, 'compare_updates');
 
-    return array_slice($updates, 0, 5);
+    return array_slice($updates, 0, $count);
 }
 
 function compare_updates($a, $b) {
@@ -105,6 +110,24 @@ function compare_updates($a, $b) {
         return 0;
     }
     return ($a['pub_date'] > $b['pub_date']) ? -1 : 1;
+}
+
+function current_domain() {
+    $url = 'http';
+    if ($_SERVER["HTTPS"] == "on") {
+        $url .= "s";
+    }
+    $url .= "://";
+    if ($_SERVER["SERVER_PORT"] != "80") {
+        $url .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"];
+    } else {
+        $url .= $_SERVER["SERVER_NAME"];
+    }
+    return $url;
+}
+
+function current_url() {
+    return current_domain() . $_SERVER["REQUEST_URI"];
 }
 
 ?>
