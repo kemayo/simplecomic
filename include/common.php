@@ -28,7 +28,7 @@ function template($name, $vars = false) {
     if(isset($template_overrides[$name])) {
         $name = $template_overrides[$name];
     }
-    if($vars) {
+    if(is_array($vars)) {
         extract($vars);
     }
     $template = BASEDIR . '/template/' . $config['template'] . '/' . $name . '.php';

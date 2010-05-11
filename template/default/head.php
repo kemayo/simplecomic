@@ -6,16 +6,8 @@ available variables:
  $config: general information about the site
 */
 
-?><!DOCTYPE html5>
-<html>
-<head>
-<title><?php echo $page['title']; ?></title>
-<?php foreach($page['css'] as $url) { ?>
-<link rel="stylesheet" href="<?php echo url($url, false, true); ?>" type="text/css" />
-<?php } ?>
-<link rel="alternate" type="application/atom+xml" title="<?php echo $config['sitename']?> updates" href="<?php echo url('/feed');?>" />
-</head>
-<body>
+template('frame_top');
+?>
 <h1>
     <a href="<?php echo url('/'); ?>"><?php echo $page['title']; ?></a>
 </h1>
