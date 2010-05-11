@@ -12,7 +12,7 @@
     -moz-border-radius:5px;
     -webkit-border-radius:5px;
     -moz-box-shadow: 0 0 15px #666;
-    -webkit-box-shadow: 0 0 15px #666;  
+    -webkit-box-shadow: 0 0 15px #666;
 }
 /* head. contains title, prev/next month controls and possible month/year selectors */
 #calhead {  
@@ -32,13 +32,22 @@
     display:block;
     width:20px;
     height:20px;
-    background:transparent url(prev.gif) no-repeat scroll center center;
     float:left;
     cursor:pointer;
+    text-align:center;
+    color:#fff;
+    background:#498CE2;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
 }
 #calnext {
-    background-image:url(next.gif);
     float:right;
+}
+#calnext:after {
+    content:">";
+}
+#calprev:before {
+    content:"<";
 }
 #calprev.caldisabled, #calnext.caldisabled {
     visibility:hidden;
