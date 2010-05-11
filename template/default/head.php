@@ -10,7 +10,9 @@ available variables:
 <html>
 <head>
 <title><?php echo $page['title']; ?></title>
-<link rel="stylesheet" href="<?php echo BASEURL; ?>/template/<?php echo $config['template']; ?>/style.css" type="text/css" />
+<?php foreach($page['css'] as $url) { ?>
+<link rel="stylesheet" href="<?php echo url($url, false, true); ?>" type="text/css" />
+<?php } ?>
 <link rel="alternate" type="application/atom+xml" title="<?php echo $config['sitename']?> updates" href="<?php echo url('/feed');?>" />
 </head>
 <body>

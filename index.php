@@ -15,6 +15,10 @@ $page = array(
     'title' => $config['title'],
     'breadcrumbs' => array(),
     'debug' => array(),
+    'css' => array(
+        "/template/{$config['template']}/style.css",
+    ),
+    'js' => array(),
 );
 
 switch($request[0]) {

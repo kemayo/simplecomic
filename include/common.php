@@ -39,7 +39,16 @@ function template($name, $vars = false) {
     }
 }
 
-function url($url, $absolute = false) {
+function add_css($css) {
+    global $page;
+    $page['css'][] = $css;
+}
+function add_js($js) {
+    global $page;
+    $page['js'][] = $js;
+}
+
+function url($url, $absolute = false, $always_pretty = false) {
     global $config;
     if(preg_match("/^[^:]+:\/\//", $url)) {
         // external link
@@ -49,7 +58,7 @@ function url($url, $absolute = false) {
     if(!$url || $url == '/') {
         return $beginning;
     }
-    if($config['pretty_urls']) {
+    if($config['pretty_urls'] || $always_pretty) {
         return  $beginning . $url;
     }
     return $beginning . "/index.php?q=" . $url;
