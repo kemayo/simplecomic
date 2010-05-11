@@ -56,7 +56,8 @@ function redirect($where) {
     $where = url($where);
     ob_end_clean();
     if(DEBUG) {
-        echo '<p>Redirect to: <a href="', $where, '">', $where, '</a></p>';
+        template('head');
+        echo '<div class="redirect">Redirect to: <a href="', $where, '">', $where, '</a></div>';
         template('foot');
         die;
     }
