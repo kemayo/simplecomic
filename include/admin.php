@@ -20,6 +20,9 @@ case 'comic':
             $db->query("UPDATE comics SET title=%s, pub_date=%d, filename=%s, chapterid=%d WHERE comicid=%d",
                 array($_POST['title'], $pub_date, $_POST['filename'], $_POST['chapterid'], $comicid));
         } else {
+            if($db->quick("SELECT comicid FROM comics WHERE pub_date = %d", $pub_date)) {
+                die_error("There is already a comic with that exact date. Please choose a different date.");
+            }
             if(isset($_POST['filename']) && $_POST['filename']) {
                 if(!file_exists(BASEDIR.$config['comicpath'].'/'.$_POST['filename'])) {
                     die("Comic file does not exist");
