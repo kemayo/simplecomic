@@ -1,9 +1,27 @@
 <?php
 
-add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js');
-add_js('http://cdn.jquerytools.org/1.2.0/form/jquery.tools.min.js');
-add_js('/template/default/admin.js');
-add_css('/template/default/cal.css');
+if (
+    isset($config['adminuser'])
+    &&
+    !(
+        isset($_SERVER['PHP_AUTH_USER'])
+        &&
+        $_SERVER['PHP_AUTH_USER'] == $config['adminuser']
+        &&
+        $_SERVER['PHP_AUTH_PW'] == $config['adminpass']
+    )
+) {
+    header('WWW-Authenticate: Basic realm="'.$config['title'].'"');
+    header('HTTP/1.0 401 Unauthorized');
+    echo 'No access for you.';
+    exit;
+}
+
+$page->add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js');
+$page->add_js('http://cdn.jquerytools.org/1.2.0/form/jquery.tools.min.js');
+$page->add_js('/template/default/admin.js');
+$page->add_css('/template/default/cal.css');
+$page->add_breadcrumb("Admin", "/admin/");
 
 switch($request[1]) {
 case 'comic':
@@ -17,7 +35,6 @@ case 'comic':
     }
     if(isset($_POST['submit'])) {
         // this would need proper errors...
-        debug('pub_date', $_POST['pub_date']);
         $pub_date = strtotime(date('Y-m-d H:i:s', strtotime($_POST['pub_date'])));
         if(!$pub_date) {
             die_error("Bad date");

@@ -9,10 +9,10 @@ available variables:
 template('frame_top');
 ?>
 <h1>
-    <a href="<?php echo url('/'); ?>"><?php echo $page['title']; ?></a>
+    <a href="<?php echo url('/'); ?>"><?php echo $page->title; ?></a>
 </h1>
-<?php if($page['breadcrumbs']) { ?>
-<ul class="breadcrumbs"><?php foreach($page['breadcrumbs'] as $i => $crumb) {
+<?php if($page->get_breadcrumbs()) { ?>
+<ul class="breadcrumbs"><?php foreach($page->get_breadcrumbs() as $i => $crumb) {
     echo '<li>';
     if(isset($crumb[1])) {
         echo '<a href="', url($crumb[1]), '">';

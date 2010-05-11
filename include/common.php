@@ -39,15 +39,6 @@ function template($name, $vars = false) {
     }
 }
 
-function add_css($css) {
-    global $page;
-    $page['css'][] = $css;
-}
-function add_js($js) {
-    global $page;
-    $page['js'][] = $js;
-}
-
 function url($url, $absolute = false, $always_pretty = false) {
     global $config;
     if(preg_match("/^[^:]+:\/\//", $url)) {
@@ -86,15 +77,6 @@ function die_error($error) {
     echo '<div class="error">Error: ', $error, '</div>';
     template('foot');
     die;
-}
-
-function debug($key, $details) {
-    if(!DEBUG) {
-        // no point in accumulating
-        return;
-    }
-    global $page;
-    $page['debug'][$key] = $details;
 }
 
 function ob_template($name, $vars = false) {

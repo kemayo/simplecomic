@@ -5,21 +5,16 @@ ob_start();
 define('BASEDIR', dirname(__FILE__));
 
 require_once 'include/db.php';
+require_once 'include/page.php';
 require_once 'include/common.php';
 require_once 'include/config.php';
 
 $request = isset($_REQUEST['q']) && $_REQUEST['q'] && $_REQUEST['q'] != '/' ? $_REQUEST['q'] : 'index';
 $request = array_values(array_filter(explode('/', $request)));
 
-$page = array(
-    'title' => $config['title'],
-    'breadcrumbs' => array(),
-    'debug' => array(),
-    'css' => array(
-        "/template/{$config['template']}/style.css",
-    ),
-    'js' => array(),
-);
+$page = new Page();
+$page->title = $config['title'];
+$page->add_css("/template/{$config['template']}/style.css");
 
 switch($request[0]) {
     case 'index':
@@ -127,23 +122,6 @@ switch($request[0]) {
         }
         break;
     case 'admin':
-        if (
-            isset($config['adminuser'])
-            &&
-            !(
-                isset($_SERVER['PHP_AUTH_USER'])
-                &&
-                $_SERVER['PHP_AUTH_USER'] == $config['adminuser']
-                &&
-                $_SERVER['PHP_AUTH_PW'] == $config['adminpass']
-            )
-        ) {
-            header('WWW-Authenticate: Basic realm="'.$config['title'].'"');
-            header('HTTP/1.0 401 Unauthorized');
-            echo 'No access for you.';
-            exit;
-        }
-        $page['breadcrumbs'][] = array("Admin", "/admin/");
         require 'include/admin.php';
         break;
     case 'feed':
