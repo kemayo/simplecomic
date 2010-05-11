@@ -59,7 +59,7 @@ case 'comic':
             "REPLACE INTO comics_text (comicid, description, transcript, alt_text) VALUES (%d, %s, %s, %s)",
             array($comicid, $_POST['description'], $_POST['transcript'], $_POST['alt_text']));
 
-        redirect("/admin/comic/".$comicid);
+        redirect("/admin/comic/".$comicid, "Saving comic was successful.");
         die;
     }
     $comic['chapters'] = $db->fetch("SELECT * FROM chapters ORDER BY `order` DESC");
@@ -91,7 +91,7 @@ case 'chapter':
             "REPLACE INTO chapters_text (chapterid, description) VALUES (%d, %s)",
             array($chapterid, $_POST['description']));
 
-        redirect("/admin/chapter/".$chapterid);
+        redirect("/admin/chapter/".$chapterid, "Saving chapter was successful.");
         die;
     }
     template('admin_chapter', $chapter);
@@ -125,7 +125,7 @@ case 'rant':
             "REPLACE INTO rants_text (rantid, text) VALUES (%d, %s)",
             array($rantid, $_POST['text']));
 
-        redirect("/admin/rant/".$rantid);
+        redirect("/admin/rant/".$rantid, "Saving rant was successful.");
         die;
     }
     template('admin_rant', $rant);

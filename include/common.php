@@ -64,12 +64,15 @@ function url($url, $absolute = false, $always_pretty = false) {
     return $beginning . "/index.php?q=" . $url;
 }
 
-function redirect($where) {
+function redirect($where, $message = false) {
     $where = url($where);
     ob_end_clean();
-    if(DEBUG) {
+    if($message || DEBUG) {
         template('head');
-        echo '<div class="redirect">Redirect to: <a href="', $where, '">', $where, '</a></div>';
+        if($message) {
+            echo '<div class="message">', $message, '</div>';
+        }
+        echo '<div class="redirect">','Continue to: <a href="', $where, '">', $where, '</a></div>';
         template('foot');
         die;
     }
