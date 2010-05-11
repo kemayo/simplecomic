@@ -1,4 +1,4 @@
-<?php template('head'); ?>
+<?php template('admin_head'); ?>
 
 <form action="" method="POST" enctype="multipart/form-data">
     <?php if(isset($rantid) && $rantid && $rantid != 'new') { ?>
@@ -9,7 +9,7 @@
 
     <label>Date</label>
     <input name="pub_date" value="<?php echo isset($pub_date) ? date('Y-m-d H:i:s', $pub_date) : ''; ?>" />
-    <small>YYYY-MM-DD HH:MM. Rants dated in the future will not be published until that time.</small>
+    <small>YYYY-MM-DD HH:MM:SS. Rants dated in the future will not be published until that time.</small>
 
     <label>Text</label>
     <textarea name="text" rows="8" cols="40"><?php echo htmlentities($text); ?></textarea>
@@ -17,4 +17,4 @@
     <input type="submit" name="submit" value="save" />
 </form>
 
-<?php template('foot'); ?>
+<?php template('admin_foot'); ?>

@@ -4,7 +4,7 @@ available variables:
  $page: array of info about the page
  $rants: array of info about the rants
 */
-template('head');
+template('rant_head');
 ?>
 <div class="rants">
     <h3>Rants</h3>
@@ -19,5 +19,5 @@ template('head');
     <?php } ?>
 </div>
 <?php
-template('foot');
+template('rant_foot');
 ?>

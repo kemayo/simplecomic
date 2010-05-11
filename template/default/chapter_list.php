@@ -4,7 +4,7 @@ available variables:
  $page: array of info about the page
  $chapters: array of info about the chapters
 */
-template('head');
+template('chapter_head');
 ?>
 <div class="chapters">
     <h3>Chapters</h3>
@@ -19,5 +19,5 @@ template('head');
     <?php } ?>
 </div>
 <?php
-template('foot');
+template('chapter_foot');
 ?>

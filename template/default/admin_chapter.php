@@ -1,4 +1,4 @@
-<?php template('head'); ?>
+<?php template('admin_head'); ?>
 <form action="" method="POST" enctype="multipart/form-data">
     <?php if(isset($chapterid) && $chapterid && $chapterid != 'new') { ?>
         <input name="chapterid" value=<?php echo $chapterid; ?> type="hidden" />
@@ -15,4 +15,4 @@
 	<input type="submit" name="submit" value="save" />
 </form>
 
-<?php template('foot'); ?>
+<?php template('admin_foot'); ?>

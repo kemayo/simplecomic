@@ -1,4 +1,4 @@
-<?php template('head'); ?>
+<?php template('admin_head'); ?>
 
 <?php
 if(!isset($text)) {
@@ -18,8 +18,8 @@ if(!isset($text)) {
     <input name="title" value="<?php echo isset($title) ? $title : ''; ?>" />
 
     <label>Date</label>
-    <input name="pub_date" value="<?php echo isset($pub_date) ? date('Y-m-d H:i:s', $pub_date) : ''; ?>" />
-    <small>YYYY-MM-DD HH:MM. Comics dated in the future will not be published until that time.</small>
+    <input name="pub_date" value="<?php echo date('Y-m-d H:i:s', isset($pub_date) ? $pub_date : time()); ?>" />
+    <small>YYYY-MM-DD HH:MM:SS. Comics dated in the future will not be published until that time.</small>
 
     <label>Chapter</label>
     <select name="chapterid">
@@ -54,4 +54,4 @@ if(!isset($text)) {
 
 </form>
 
-<?php template('foot'); ?>
+<?php template('admin_foot'); ?>

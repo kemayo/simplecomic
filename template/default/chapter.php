@@ -5,7 +5,7 @@ available variables:
  $chapter: array of info about the chapter
  $comics: array of comics
 */
-template('head');
+template('chapter_head');
 ?>
 <div class="chapter">
     <h3><?php echo $chapter['title']; ?></h3>
@@ -19,5 +19,5 @@ template('head');
     </ul>
 </div>
 <?php
-template('foot');
+template('chapter_foot');
 ?>

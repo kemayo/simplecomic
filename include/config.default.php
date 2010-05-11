@@ -15,6 +15,18 @@ $config = array(
     'adminpass' => "admin",
 );
 
+$template_overrides = array(
+    // 'template_name' => 'template_to_use_instead'
+    'admin_head' => 'head',
+    'admin_foot' => 'foot',
+    'comic_head' => 'head',
+    'comic_foot' => 'foot',
+    'chapter_head' => 'head',
+    'chapter_foot' => 'foot',
+    'rant_head' => 'head',
+    'rant_foot' => 'foot',
+);
+
 $db = new DataBase('localhost', 'database', 'username', 'password', DEBUG);
 
 ?>

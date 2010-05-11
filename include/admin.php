@@ -13,7 +13,7 @@ case 'comic':
         // this would need proper errors...
         $pub_date = strtotime(date('Y-m-d H:i:s', strtotime($_POST['pub_date'])));
         if(!$pub_date) {
-            die("Bad date");
+            die_error("Bad date");
         }
         if($comic) {
             $comicid = $comic['comicid'];
@@ -25,24 +25,24 @@ case 'comic':
             }
             if(isset($_POST['filename']) && $_POST['filename']) {
                 if(!file_exists(BASEDIR.$config['comicpath'].'/'.$_POST['filename'])) {
-                    die("Comic file does not exist");
+                    die_error("Comic file does not exist");
                 }
                 $filename = $_POST['filename'];
             } else {
                 if($_FILES['comicfile']['error'] == UPLOAD_ERR_NO_FILE) {
-                    die("No file uploaded");
+                    die_error("No file uploaded");
                 }
                 $uploadpath = BASEDIR.$config['comicpath'].'/'.basename($_FILES['comicfile']['name']);
                 if(file_exists($uploadpath)) {
-                    die("File exists");
+                    die_error("File exists");
                 }
                 if(!move_uploaded_file($_FILES['comicfile']['tmp_name'], $uploadpath)) {
-                    die("Couldn't move uploaded file");
+                    die_error("Couldn't move uploaded file");
                 }
                 $filename = basename($_FILES['comicfile']['name']);
             }
             if(!$filename) {
-                die("No filename");
+                die_error("No filename");
             }
             $comicid = $db->insert_id(
                 "INSERT INTO comics (title, pub_date, filename, chapterid) VALUES (%s, %d, %s, %d)",
@@ -78,7 +78,7 @@ case 'chapter':
                 array($_POST['title'], $_POST['slug'], $order));
         }
         if(!$chapterid) {
-            die("Error saving");
+            die_error("Error saving");
         }
         $db->query(
             "REPLACE INTO chapters_text (chapterid, description) VALUES (%d, %s)",
@@ -100,7 +100,7 @@ case 'rant':
     if(isset($_POST['submit'])) {
         $pub_date = strtotime(date('Y-m-d H:i:s', strtotime($_POST['pub_date'])));
         if(!$pub_date) {
-            die("Bad date");
+            die_error("Bad date");
         }
         if($rant) {
             $rantid = $rant['rantid'];
@@ -112,7 +112,7 @@ case 'rant':
                 array($_POST['title'], $pub_date));
         }
         if(!$rantid) {
-            die("Error saving");
+            die_error("Error saving");
         }
         $db->query(
             "REPLACE INTO rants_text (rantid, text) VALUES (%d, %s)",

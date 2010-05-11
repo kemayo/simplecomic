@@ -4,7 +4,7 @@ available variables:
  $page: array of info about the page
  $comic: array of info about the comic
 */
-template('head');
+template('comic_head');
 template('comic', $comic);
-template('foot');
+template('comic_foot');
 ?>

@@ -24,7 +24,10 @@ if (get_magic_quotes_gpc()) {
  * @return void
  */
 function template($name, $vars = false) {
-    global $config, $page;
+    global $config, $page, $template_overrides;
+    if(isset($template_overrides[$name])) {
+        $name = $template_overrides[$name];
+    }
     if($vars) {
         extract($vars);
     }
@@ -65,6 +68,14 @@ function redirect($where) {
     die;
 }
 
+function die_error($error) {
+    ob_end_clean();
+    template('head');
+    echo '<div class="error">Error: ', $error, '</div>';
+    template('foot');
+    die;
+}
+
 function debug($key, $details) {
     if(!DEBUG) {
         // no point in accumulating
@@ -82,7 +93,8 @@ function ob_template($name, $vars = false) {
 
 function fetch_navigation($comic) {
     global $db;
-    $comics_today = $db->quick("SELECT COUNT(*) FROM comics WHERE pub_date = %d", $comic['pub_date']);
+    // comics that were published at the exact moment that this one was:
+    // $comics_now = $db->quick("SELECT COUNT(*) FROM comics WHERE pub_date = %d", $comic['pub_date']);
     return array(
         'current' => $comic['comicid'],
         'prev' => $db->quick("SELECT comicid FROM comics WHERE pub_date < %d AND pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date DESC LIMIT 1", $comic['pub_date']),
