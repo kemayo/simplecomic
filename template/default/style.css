@@ -82,6 +82,7 @@ input, select, textarea, small {
 div.foot {
     margin-top:2em;
     text-align:center;
+    color:#ccc;
 }
 div.foot a {
     color:#ccc;

@@ -1,5 +1,7 @@
 <?php
 
+$start_time = microtime(true);
+
 ob_start();
 
 define('BASEDIR', dirname(__FILE__));
@@ -15,6 +17,7 @@ $request = array_values(array_filter(explode('/', $request)));
 $page = new Page();
 $page->title = $config['title'];
 $page->add_css("template/{$config['template']}/style.css");
+$page->set_start_time($start_time);
 
 switch($request[0]) {
     case 'index':

@@ -8,6 +8,11 @@ class Page {
     private $breadcrumbs = array();
     
     private $debug = array();
+    private $start_time = 0;
+    
+    public function set_start_time($start_time) {
+        $this->start_time = $start_time;
+    }
     
     public function add_css($url) {
         $this->css[$url] = $url;
@@ -23,11 +28,12 @@ class Page {
     }
     
     public function debug($key, $details) {
-        if(!DEBUG) {
-            // no point in accumulating
-            return;
+        if(DEBUG) {
+            $this->debug[$key] = $details;
         }
-        $this->debug[$key] = $details;
+    }
+    public function get_debug() {
+        return $this->debug;
     }
     
     public function output_css() {
@@ -44,6 +50,10 @@ class Page {
                 echo '<script src="', url($js, false, true), '" type="text/javascript"></script>';
             }
         }
+    }
+    
+    public function elapsed() {
+        return microtime(true) - $this->start_time;
     }
 }
 
