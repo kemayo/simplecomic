@@ -91,7 +91,7 @@ switch($request[0]) {
         break;
     case 'chapters':
         // chapter listing
-        $chapters = $db->fetch("SELECT * FROM chapters ORDER BY `order` DESC");
+        $chapters = $db->fetch("SELECT * FROM chapters ORDER BY `order` ASC");
         template('chapter_list', array('chapters'=>$chapters));
         break;
     case 'chapter':
