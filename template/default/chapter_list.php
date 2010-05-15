@@ -15,7 +15,7 @@ template('chapter_head');
         <?php } ?>
     </ul>
     <?php } else { ?>
-    <p>No Rants</p>
+    <p>No Chapters</p>
     <?php } ?>
 </div>
 <?php
