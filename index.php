@@ -102,7 +102,7 @@ switch($request[0]) {
             if(!$chapter) {
                 redirect("/chapters");
             }
-            $comics = $db->fetch("SELECT * FROM comics WHERE chapterid=%d AND pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date DESC", $chapter['chapterid']);
+            $comics = $db->fetch("SELECT * FROM comics WHERE chapterid=%d AND pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date ASC", $chapter['chapterid']);
             template('chapter', array(
                 'chapter' => $chapter,
                 'comics' => $comics,

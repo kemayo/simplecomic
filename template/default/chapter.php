@@ -9,9 +9,11 @@ template('chapter_head');
 ?>
 <div class="chapter">
     <h3><?php echo $chapter['title']; ?></h3>
+    <?php if($chapter['description']) { ?>
     <div class="description">
         <?php echo $chapter['description']; ?>
     </div>
+    <?php } ?>
     <ul>
         <?php foreach($comics as $comic) { ?>
         <li><a href="<?php echo url('comic/'.$comic['comicid']); ?>"><?php echo $comic['title'] ?></a></li>
