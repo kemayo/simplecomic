@@ -14,7 +14,7 @@ $request = array_values(array_filter(explode('/', $request)));
 
 $page = new Page();
 $page->title = $config['title'];
-$page->add_css("/template/{$config['template']}/style.css");
+$page->add_css("template/{$config['template']}/style.css");
 
 switch($request[0]) {
     case 'index':

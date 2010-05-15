@@ -19,8 +19,8 @@ if (
 
 $page->add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js');
 $page->add_js('http://cdn.jquerytools.org/1.2.0/form/jquery.tools.min.js');
-$page->add_js('/template/default/admin.js');
-$page->add_css('/template/default/cal.css');
+$page->add_js('template/default/admin.js');
+$page->add_css('template/default/cal.css');
 $page->add_breadcrumb("Admin", "/admin/");
 
 switch($request[1]) {
