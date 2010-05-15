@@ -84,6 +84,11 @@ switch($request[0]) {
         $comic['nav'] = fetch_navigation($comic);
         template('comic_page', array('comic'=>$comic));
         break;
+    case 'archive':
+        // full strip listing
+        $comics = $db->fetch("SELECT * FROM comics ORDER BY pub_date DESC");
+        template('archive', array('comics' => $comics));
+        break;
     case 'chapters':
         // chapter listing
         $chapters = $db->fetch("SELECT * FROM chapters ORDER BY `order` DESC");
