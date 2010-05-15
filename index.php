@@ -130,9 +130,9 @@ switch($request[0]) {
         ));
         break;
     default:
-        $potential_template = BASEDIR . "/template/{$config['template']}/page_{$request[0]}.php";
-        if(file_exists($potential_template)) {
-            template('page_'.$request[0]);
+        if(template('page_'.$request[0])) {
+            // This is *so* relying on side-effects. :P
+            // (template returns true if a valid template was found and displayed)
             return;
         }
         // 404

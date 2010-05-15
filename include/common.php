@@ -31,12 +31,16 @@ function template($name, $vars = false) {
     if(is_array($vars)) {
         extract($vars);
     }
-    $template = BASEDIR . '/template/' . $config['template'] . '/' . $name . '.php';
+    $template = BASEDIR . "/template/{$config['template']}/{$name}.php";
+    $fallback_template = BASEDIR . "/template/default/{$name}.php";
     if(file_exists($template)) {
         include $template;
+    } elseif(file_exists($fallback_template)) {
+        include $fallback_template;
     } else {
-        include BASEDIR . '/template/default/' . $name . '.php';
+        return false;
     }
+    return true;
 }
 
 function url($url, $absolute = false, $always_pretty = false) {
