@@ -98,7 +98,7 @@ switch($request[0]) {
         if(isset($request[1])) {
             // specific chapter
             $slug = $request[1];
-            $chapter = $db->fetch_first("SELECT * FROM chapters c LEFT JOIN chapters_text t ON c.chapterid = t.chapterid  WHERE c.slug=%s", $slug);
+            $chapter = $db->fetch_first("SELECT c.*, t.description FROM chapters c LEFT JOIN chapters_text t ON c.chapterid = t.chapterid  WHERE c.slug=%s", $slug);
             if(!$chapter) {
                 redirect("/chapters");
             }
