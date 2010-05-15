@@ -4,3 +4,4 @@ comics/*.gif
 comics/*.png
 comics/*.jpg
 include/config.php
+template/sombulus/
