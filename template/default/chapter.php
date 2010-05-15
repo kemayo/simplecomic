@@ -14,7 +14,7 @@ template('chapter_head');
     </div>
     <ul>
         <?php foreach($comics as $comic) { ?>
-        <li><a href="<?php echo url('/comic/'.$comic['comicid']); ?>"><?php echo $comic['title'] ?></a></li>
+        <li><a href="<?php echo url('comic/'.$comic['comicid']); ?>"><?php echo $comic['title'] ?></a></li>
         <?php } ?>
     </ul>
 </div>

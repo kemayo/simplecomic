@@ -43,17 +43,25 @@ function template($name, $vars = false) {
     return true;
 }
 
+/**
+ * Returns a canonical url
+ * Urls beginning with http:// or / are returned as-is
+ * Other urls are assumed to be relative to BASEURL
+ *
+ * @param string $url
+ * @param bool $absolute - return an absolute URL
+ * @param bool $always_pretty - force pretty_urls for this one
+ *              (intended for cases where a real file is being linked to)
+ *
+ */
 function url($url, $absolute = false, $always_pretty = false) {
     global $config;
-    if(preg_match("/^[^:]+:\/\//", $url)) {
+    if(preg_match("!^([^:]+://|/)!", $url)) {
         // external link
         return $url;
     }
-    $beginning = ($absolute ? current_domain() : '') . BASEURL;
-    if(!$url || $url == '/') {
-        return $beginning;
-    }
-    if($config['pretty_urls'] || $always_pretty) {
+    $beginning = ($absolute ? current_domain() : '') . BASEURL . '/';
+    if(!$url || $config['pretty_urls'] || $always_pretty) {
         return  $beginning . $url;
     }
     return $beginning . "/index.php?q=" . $url;

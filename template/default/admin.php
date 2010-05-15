@@ -2,10 +2,10 @@
 <h3>Comics</h3>
 <ul>
 <?php
-echo '<li><a href="', url('/admin/comic/new'), '">Add a new one</a></li>';
+echo '<li><a href="', url('admin/comic/new'), '">Add a new one</a></li>';
 foreach($comics as $c) {
     echo '<li>';
-    echo '<a href="', url('/admin/comic/'.$c['comicid']), '">';
+    echo '<a href="', url('admin/comic/'.$c['comicid']), '">';
     echo date('Y-m-d', $c['pub_date']), ' : ', $c['title'];
     echo '</a>';
     if($c['pub_date'] > time()) {
@@ -19,10 +19,10 @@ foreach($comics as $c) {
 <h3>Rants</h3>
 <ul>
 <?php
-echo '<li><a href="', url('/admin/rant/new'), '">Add a new one</a></li>';
+echo '<li><a href="', url('admin/rant/new'), '">Add a new one</a></li>';
 foreach($rants as $c) {
     echo '<li>';
-    echo '<a href="', url('/admin/rant/'.$c['rantid']), '">';
+    echo '<a href="', url('admin/rant/'.$c['rantid']), '">';
     echo date('Y-m-d', $c['pub_date']), ' : ', $c['title'];
     echo '</a>';
     if($c['pub_date'] > time()) {
@@ -36,10 +36,10 @@ foreach($rants as $c) {
 <h3>Chapters</h3>
 <ul>
 <?php
-echo '<li><a href="', url('/admin/chapter/new'), '">Add a new one</a></li>';
+echo '<li><a href="', url('admin/chapter/new'), '">Add a new one</a></li>';
 foreach($chapters as $c) {
     echo '<li>';
-    echo '<a href="', url('/admin/chapter/'.$c['chapterid']), '">';
+    echo '<a href="', url('admin/chapter/'.$c['chapterid']), '">';
     echo $c['title'];
     echo '</a>';
     echo '</li>';

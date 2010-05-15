@@ -11,7 +11,7 @@ template('chapter_head');
     <?php if($chapters) { ?>
     <ul>
         <?php foreach($chapters as $chapter) { ?>
-        <li><a href="<?php echo url('/chapter/' . $chapter['slug']); ?>"><?php echo $chapter['title'] ?></a></li>
+        <li><a href="<?php echo url('chapter/' . $chapter['slug']); ?>"><?php echo $chapter['title'] ?></a></li>
         <?php } ?>
     </ul>
     <?php } else { ?>

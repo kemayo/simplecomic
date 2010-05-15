@@ -25,17 +25,17 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
         switch($update['type']) {
             case 'comic':
                 $type = "Comic";
-                $urlbase = url('/comic/');
+                $urlbase = url('comic/', true);
                 break;
             case 'rant':
                 $type = "Rant";
-                $urlbase = url('/rant/');
+                $urlbase = url('rant/', true);
                 break;
         }
         if(!$urlbase) {
             continue;
         }
-        $entry_url = current_domain() . $urlbase . $update['id'];
+        $entry_url = $urlbase . $update['id'];
         ?>
         <entry>
             <id><?=$entry_url;?></id>
@@ -43,7 +43,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
             <title><![CDATA[<?=$type . ': ' . $update['title']?>]]></title>
             <author>
                 <name><![CDATA[<?=$config['author'];?>]]></name>
-                <uri><?=$config['author_url'] ? $config['author_url'] : url('/', true);?></uri>
+                <uri><?=$config['author_url'] ? $config['author_url'] : url('', true);?></uri>
             </author>
             <published><?=date('c', $update['pub_date']);?></published>
             <updated><?=date('c', $update['pub_date']);?></updated>

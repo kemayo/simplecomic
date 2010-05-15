@@ -16,10 +16,10 @@ template('rant', $rant);
             echo '<li class="recent-', $update['type'], '">';
             switch($update['type']) {
                 case 'comic':
-                    echo 'Comic: <a href="', url('/comic/');
+                    echo 'Comic: <a href="', url('comic/');
                     break;
                 case 'rant':
-                    echo 'Rant: <a href="', url('/rant/');
+                    echo 'Rant: <a href="', url('rant/');
                     break;
             }
             echo $update['id'], '">', $update['title'], '</a> ', date('m/j/y', $update['pub_date']);
