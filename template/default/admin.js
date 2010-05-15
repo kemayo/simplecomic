@@ -12,7 +12,7 @@ $("input.datetime").each(function() {
     };
     date_input.bind('onHide', update_date);
     time_input.change(update_date);
-    $this.closest('form').submit(update_date);
+    $this.closest('form').bind('submit', update_date);
     $this.prev('label').append($(' <a href="#" title="hide calendar">(x)</a>)').click(function(e) {
         e.preventDefault();
         update_date();
@@ -20,5 +20,6 @@ $("input.datetime").each(function() {
         time_input.remove();
         $this.show();
         $(this).remove();
+        $this.closest('form').unbind('submit', update_date);
     }))
 });
