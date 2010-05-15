@@ -130,6 +130,11 @@ switch($request[0]) {
         ));
         break;
     default:
+        $potential_template = BASEDIR . "/template/{$config['template']}/page_{$request[0]}.php";
+        if(file_exists($potential_template)) {
+            template('page_'.$request[0]);
+            return;
+        }
         // 404
         header("HTTP/1.0 404 Not Found");
         echo '404';
