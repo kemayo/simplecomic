@@ -11,6 +11,20 @@ require_once 'include/page.php';
 require_once 'include/common.php';
 require_once 'include/config.php';
 
+$template_fallbacks = array(
+    // 'template_name' => 'template_to_use_instead'
+    'admin_head' => 'head',
+    'admin_foot' => 'foot',
+    'archive_head' => 'head',
+    'archive_foot' => 'foot',
+    'comic_head' => 'head',
+    'comic_foot' => 'foot',
+    'chapter_head' => 'head',
+    'chapter_foot' => 'foot',
+    'rant_head' => 'head',
+    'rant_foot' => 'foot',
+);
+
 $request = isset($_REQUEST['q']) && $_REQUEST['q'] && $_REQUEST['q'] != '/' ? $_REQUEST['q'] : 'index';
 $request = array_values(array_filter(explode('/', $request)));
 
@@ -78,7 +92,7 @@ switch($request[0]) {
         // comic page
         $comic = $db->fetch_first("SELECT * FROM comics WHERE comicid = %d AND pub_date <= UNIX_TIMESTAMP()", $request[1]);
         if(!$comic) {
-            redirect("/");
+            redirect("");
         }
         $comic['text'] = fetch_text($comic['comicid']);
         $comic['nav'] = fetch_navigation($comic);
@@ -100,7 +114,7 @@ switch($request[0]) {
             $slug = $request[1];
             $chapter = $db->fetch_first("SELECT c.*, t.description FROM chapters c LEFT JOIN chapters_text t ON c.chapterid = t.chapterid  WHERE c.slug=%s", $slug);
             if(!$chapter) {
-                redirect("/chapters");
+                redirect("chapters");
             }
             $comics = $db->fetch("SELECT * FROM comics WHERE chapterid=%d AND pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date ASC", $chapter['chapterid']);
             template('chapter', array(
@@ -108,7 +122,7 @@ switch($request[0]) {
                 'comics' => $comics,
             ));
         } else {
-            redirect("/chapters");
+            redirect("chapters");
         }
         break;
     case 'rants':
@@ -120,13 +134,13 @@ switch($request[0]) {
             // specific rant
             $rant = $db->fetch_first("SELECT * FROM rants r LEFT JOIN rants_text t ON r.rantid = t.rantid WHERE r.rantid=%d", $request[1]);
             if(!$rant) {
-                redirect("/rants");
+                redirect("rants");
             }
             template('rant_page', array(
                 'rant' => $rant,
             ));
         } else {
-            redirect("/chapters");
+            redirect("chapters");
         }
         break;
     case 'admin':
