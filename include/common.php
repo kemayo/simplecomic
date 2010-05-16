@@ -18,29 +18,33 @@ if (get_magic_quotes_gpc()) {
 
 /**
  * Includes a template
+ * If the template is not found it will try the following:
+ *  1. If the template is in $template_fallbacks, that template instead
+ *  2. The same template in default
+ *  3. If the template is in $template_fallbacks, that template in default instead
  *
  * @param string $name
  * @param array $vars
  * @return void
  */
-function template($name, $vars = false) {
-    global $config, $page, $template_overrides;
-    if(isset($template_overrides[$name])) {
-        $name = $template_overrides[$name];
+function template($name, $vars = false, $template_dir = false, $allow_fallback = true) {
+    global $config, $page, $template_fallbacks;
+    if(!$template_dir) {
+        $template_dir = $config['template'];
     }
-    if(is_array($vars)) {
-        extract($vars);
-    }
-    $template = BASEDIR . "/template/{$config['template']}/{$name}.php";
-    $fallback_template = BASEDIR . "/template/default/{$name}.php";
+    $template = BASEDIR . "/template/{$template_dir}/{$name}.php";
     if(file_exists($template)) {
+        if(is_array($vars)) {
+            extract($vars);
+        }
         include $template;
-    } elseif(file_exists($fallback_template)) {
-        include $fallback_template;
-    } else {
-        return false;
+        return true;
+    } elseif(isset($template_fallbacks[$name]) && template($template_fallbacks[$name], $vars, $template_dir, false)) {
+        return true;
+    } elseif($template_dir != 'default') {
+        return template($name, $vars, 'default');
     }
-    return true;
+    return false;
 }
 
 /**

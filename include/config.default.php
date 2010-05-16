@@ -15,7 +15,7 @@ $config = array(
     'adminpass' => "admin",
 );
 
-$template_overrides = array(
+$template_fallbacks = array(
     // 'template_name' => 'template_to_use_instead'
     'admin_head' => 'head',
     'admin_foot' => 'foot',
