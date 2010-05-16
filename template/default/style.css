@@ -64,6 +64,15 @@ div.recently ul {
     list-style:none;
 }
 
+div.archive li.chapter {
+    list-style:none;
+    font-weight:bold;
+    font-size:18pt;
+}
+div.archive li.chapter a {
+    text-decoration:none;
+}
+
 pre.debug {
     background:#ccc;
     border:1px solid black;
