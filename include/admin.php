@@ -41,6 +41,9 @@ case 'comic':
         }
         if($comic) {
             $comicid = $comic['comicid'];
+            if($db->quick("SELECT comicid FROM comics WHERE pub_date = %d AND comicid != %d", array($pub_date, $comicid))) {
+                die_error("There is already a comic with that exact date. Please choose a different date.");
+            }
             $db->query("UPDATE comics SET title=%s, pub_date=%d, filename=%s, chapterid=%d WHERE comicid=%d",
                 array($_POST['title'], $pub_date, $_POST['filename'], $_POST['chapterid'], $comicid));
         } else {
