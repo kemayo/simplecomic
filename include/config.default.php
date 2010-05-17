@@ -11,6 +11,7 @@ $config = array(
     'template' => "default",
     'full_feed' => true, // means that comic images and rants appear in the feed
     'pretty_urls' => true,
+    'frontpage_comic' => 'latest', // 'latest', 'first', or 'first-of-latest-day'
     'adminuser' => "admin",
     'adminpass' => "admin",
 );

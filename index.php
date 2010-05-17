@@ -36,7 +36,22 @@ $page->set_start_time($start_time);
 switch($request[0]) {
     case 'index':
         // frontpage
-        $comic = $db->fetch_first("SELECT * FROM comics WHERE pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date DESC LIMIT 1");
+        $selection_style = isset($config['frontpage_comic']) ? $config['frontpage_comic'] : 'latest';
+        $page->debug('selection_style', $selection_style);
+        switch($selection_style) {
+            case 'first':
+                $comic = $db->fetch_first("SELECT * FROM comics WHERE pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date ASC LIMIT 1");
+                break;
+            case 'first-of-latest-day':
+                $latest = $db->quick("SELECT pub_date FROM comics WHERE pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date DESC LIMIT 1");
+                $midnight = strtotime(date('Y-m-d', $latest));
+                $comic = $db->fetch_first("SELECT * FROM comics WHERE pub_date >= %d AND pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date ASC LIMIT 1", $midnight);
+                break;
+            case 'latest':
+            default:
+                $comic = $db->fetch_first("SELECT * FROM comics WHERE pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date DESC LIMIT 1");
+                break;
+        }
         $comic['text'] = fetch_text($comic['comicid']);
         $comic['nav'] = fetch_navigation($comic);
         $rant = $db->fetch_first("SELECT * FROM rants r LEFT JOIN rants_text t ON r.rantid = t.rantid WHERE pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date DESC LIMIT 1");
