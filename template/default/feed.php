@@ -51,7 +51,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
             <content type="html"><![CDATA[<?php
             switch($update['type']) {
                 case 'comic':
-                    ?><img src="<?php echo current_domain(), $urlbase, 'image/', $update['id']; ?>" alt="comic" title="<?=$update['alt_text']?>" /><?php
+                    ?><img src="<?php echo $urlbase, 'image/', $update['id']; ?>" alt="comic" title="<?=$update['alt_text']?>" /><?php
                     if($update['description']) {
                         ?><div><?=$update['description'];?></div><?php
                     }
