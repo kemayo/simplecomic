@@ -53,6 +53,11 @@ in ``default``.
 Hopefully there are enough CSS hooks that adjusting ``style.css`` should
 get you fairly far without you needing to meddle with the template files.
 
+To create a static page, make a template called ``page_[name-of-page].php``
+and it will be displayed when you visit ``http://[url]/[name-of-page]``.
+I'd recommend using the examples from the existing page templates as a
+base for static pages, as they get a lot of page-setup done for you.
+
 Todo
 ----
 
