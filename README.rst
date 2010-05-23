@@ -20,6 +20,9 @@ Features
 - Optional chapter divisions for comics
 - "Rants" as a lightweight blog, with scheduled posting
 - Theming system
+- Static pages
+- Support for the frontpage showing the first comic from the
+  most recent day with comics, to allow posting of "issues"
 
 Installing
 ----------
