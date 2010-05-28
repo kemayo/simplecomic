@@ -19,7 +19,6 @@ ul.breadcrumbs li {
 
 div.maincontent {
     width:50%;
-    /*margin:0 auto;*/
     margin-left:150px;
 }
 div.comic {
@@ -35,11 +34,21 @@ ul.nav li {
     padding:1ex 1ex 0;
 }
 
-div.description {
+div.description, div.transcript {
+    position:relative;
     background:#eee;
     border:1px solid #ccc;
     padding:1em;
+    margin-top:1ex;
     text-align:left;
+}
+div.description h4, div.transcript h4 {
+    position:absolute;
+    top:0;
+    right:1ex;
+    padding:0;
+    margin:0;
+    opacity:0.5;
 }
 
 div.navmenu {

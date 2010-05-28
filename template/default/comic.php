@@ -19,11 +19,18 @@ available variables:
     }
     ?> />
     <?php template('comicnav', $nav); ?>
-    <?php if($text['description']) {
-        echo '<div class="description">';
+    <?php
+    if($text['description']) {
+        echo '<div class="description"><h4>Description</h4>';
         echo $text['description'];
         echo '</div>';
-    } ?>
+    }
+    if($text['transcript']) {
+        echo '<div class="transcript"><h4>Transcript</h4>';
+        echo $text['transcript'];
+        echo '</div>';
+    }
+    ?>
     <?php } else { ?>
     No comic.
     <?php } ?>
