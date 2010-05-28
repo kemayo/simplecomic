@@ -63,5 +63,4 @@ Todo
 
 - Chapter navigation could be improved
 - Rant commenting
-- Transcript display
 - Calendar displays that you don't have to write yourself in themes
