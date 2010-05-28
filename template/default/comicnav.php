@@ -9,6 +9,11 @@ Available variables:
     $last: id of final comic
 */
 
+if(!($first || $prev || $next || $last)) {
+    // don't show any navigation if there's nothing to show
+    return;
+}
+
 ?>
 <ul class="nav">
 <?php
