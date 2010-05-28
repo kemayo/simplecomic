@@ -13,11 +13,13 @@ available variables:
     <h2><?php echo $title; ?></h2>
     <span class="date"><?php echo date('Y-m-d', $pub_date); ?></span>
     <?php template('comicnav', $nav); ?>
+    <?php if(isset($nav['next'])) { ?><a href="<?php echo url('comic/'.$nav['next']); ?>"><?php } ?>
     <img src="<?php echo url('comic/image/' . $comicid); ?>" alt="comic" <?php
     if($text['alt_text']) {
         echo 'title="'.$text['alt_text'].'"';
     }
     ?> />
+    <?php if(isset($nav['next'])) { ?></a><?php } ?>
     <?php template('comicnav', $nav); ?>
     <?php
     if($text['description']) {

@@ -17,6 +17,10 @@ ul.breadcrumbs li {
     margin:0 1em;
 }
 
+a img {
+    border:0;
+}
+
 div.maincontent {
     width:50%;
     margin-left:150px;
