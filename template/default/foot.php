@@ -9,6 +9,6 @@
 <div class="foot">
     <a href="http://github.com/kemayo/simplecomic/">simplecomic</a>
     |
-    generated in <?=number_format($page->elapsed(), 4)?>s
+    generated in <?php echo number_format($page->elapsed(), 4); ?>s
 </div>
 <?php template('frame_bottom'); ?>

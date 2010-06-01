@@ -16,7 +16,7 @@ $current_chapter = -1;
             if($comic['chapterid'] && $comic['chapterid'] != $current_chapter) {
                 $current_chapter = $comic['chapterid'];
                 ?><li class="chapter">
-                    <a href="<?php echo url('chapter/'.$comic['chapter_slug']); ?>"><?=$comic['chapter_title']?></a>
+                    <a href="<?php echo url('chapter/'.$comic['chapter_slug']); ?>"><?php echo $comic['chapter_title']; ?></a>
                 </li><?php
             }
         ?>
