@@ -16,7 +16,7 @@ available variables:
     <?php if(isset($nav['next'])) { ?><a href="<?php echo url('comic/'.$nav['next']); ?>"><?php } ?>
     <img src="<?php echo url('comic/image/' . $comicid); ?>" alt="comic" <?php
     if($text['alt_text']) {
-        echo 'title="'.$text['alt_text'].'"';
+        echo 'title="', htmlspecialchars($text['alt_text']), '"';
     }
     ?> />
     <?php if(isset($nav['next'])) { ?></a><?php } ?>
