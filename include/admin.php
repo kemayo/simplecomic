@@ -33,7 +33,11 @@ case 'comic':
             $comic['text'] = fetch_text($comic['comicid']);
         }
     }
-    if(isset($_POST['submit'])) {
+    if($comic && isset($_POST['delete'])) {
+        $db->query("DELETE FROM comics WHERE comicid = %d", $request[2]);
+        $db->query("DELETE FROM comics_text WHERE comicid = %d", $request[2]);
+        redirect("admin/", "Comic {$request[2]} deleted");
+    } elseif(isset($_POST['submit'])) {
         // this would need proper errors...
         $pub_date = strtotime(date('Y-m-d H:i:s', strtotime($_POST['pub_date'])));
         if(!$pub_date) {
@@ -124,7 +128,11 @@ case 'rant':
             $rant['text'] = $db->quick("SELECT text FROM rants_text WHERE rantid = %d", $request[2]);
         }
     }
-    if(isset($_POST['submit'])) {
+    if($rant && isset($_POST['delete'])) {
+        $db->query("DELETE FROM rants WHERE rantid = %d", $request[2]);
+        $db->query("DELETE FROM rants_text WHERE rantid = %d", $request[2]);
+        redirect("admin/", "Rant {$request[2]} deleted");
+    } elseif(isset($_POST['submit'])) {
         $pub_date = strtotime(date('Y-m-d H:i:s', strtotime($_POST['pub_date'])));
         if(!$pub_date) {
             die_error("Bad date");

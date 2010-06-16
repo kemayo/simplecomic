@@ -50,8 +50,10 @@ if(!isset($text)) {
     <label>Transcript</label>
     <textarea name="transcript" rows="8" cols="40"><?php echo htmlentities($text['transcript']); ?></textarea>
 
-    <input type="submit" name="submit" value="Save" />
-
+    <div class="submit-block">
+        <input type="submit" name="submit" value="Save" />
+        <button name="delete" class="delete" value="1">Delete</button>
+    </div>
 </form>
 
 <?php template('admin_foot'); ?>

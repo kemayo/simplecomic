@@ -23,3 +23,8 @@ $("input.datetime").each(function() {
         $this.closest('form').unbind('submit', update_date);
     }))
 });
+$("button.delete").click(function(e) {
+    if(!confirm("Are you sure you want to delete this?")) {
+        e.preventDefault();
+    }
+});

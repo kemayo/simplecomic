@@ -96,9 +96,25 @@ label {
     display:block;
     float:left;
 }
-input, select, textarea, small {
+input, select, textarea, small, button {
     display:block;
     margin-left:10em;
+}
+div.submit-block {
+    padding-left:10em;
+    margin-top:1em;
+}
+div.submit-block input, div.submit-block button {
+    display:inline-block;
+    margin-left:0;
+}
+div.submit-block button.delete {
+    border:0;
+    background:transparent;
+    text-decoration:underline;
+    color:blue;
+    cursor:pointer;
+    margin-top:1ex;
 }
 
 div.foot {
