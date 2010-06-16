@@ -1,6 +1,7 @@
 <?php template('admin_head'); ?>
 
 <form action="" method="POST" enctype="multipart/form-data">
+    <?php echo authtoken_input(); ?>
     <?php if(isset($rantid) && $rantid && $rantid != 'new') { ?>
         <input name="rantid" value=<?php echo $rantid; ?> type="hidden" />
     <?php } ?>

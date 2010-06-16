@@ -167,4 +167,14 @@ function current_url() {
     return current_domain() . $_SERVER["REQUEST_URI"];
 }
 
+function authtoken($salt = '') {
+    global $config;
+    return md5($salt . $config['adminuser'] . $config['adminpass']);
+}
+
+function authtoken_input($salt = '') {
+    $authtoken = authtoken($salt);
+    return '<input type="hidden" name="authtoken" value="' . $authtoken . '" />';
+}
+
 ?>

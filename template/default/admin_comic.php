@@ -11,6 +11,7 @@ if(!isset($text)) {
 ?>
 
 <form action="" method="POST" enctype="multipart/form-data">
+    <?php echo authtoken_input(); ?>
     <?php if(isset($comicid) && $comicid && $comicid != 'new') { ?>
         <input name="comicid" value=<?php echo $comicid; ?> type="hidden" />
     <?php } ?>
