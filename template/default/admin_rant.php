@@ -17,7 +17,9 @@
 
     <div class="submit-block">
         <input type="submit" name="submit" value="Save" />
+        <?php if(isset($rantid) && $rantid && $rantid != 'new') { ?>
         <button name="delete" class="delete" value="1">Delete</button>
+        <?php } ?>
     </div>
 </form>
 
