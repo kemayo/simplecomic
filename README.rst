@@ -58,6 +58,18 @@ and it will be displayed when you visit ``http://[url]/[name-of-page]``.
 I'd recommend using the examples from the existing page templates as a
 base for static pages, as they get a lot of page-setup done for you.
 
+Upgrading
+---------
+
+If you follow the customization advice above, upgrading is really easy.
+
+Just copy a new version over your old install. Your config and custom
+templates will be left untouched. You might need to edit your templates
+to take advantage of new features.
+
+If you've made changes to the core files or the default templates, you
+are on your own. Read the changelogs, would be my recommendation.
+
 Todo
 ----
 
