@@ -29,7 +29,10 @@ class Page {
     
     public function debug($key, $details) {
         if(DEBUG) {
-            $this->debug[$key] = $details;
+            if(!isset($this->debug[$key])) {
+                $this->debug[$key] = array();
+            }
+            $this->debug[$key][] = $details;
         }
     }
     public function get_debug() {

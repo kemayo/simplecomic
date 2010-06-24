@@ -11,18 +11,23 @@ require_once 'include/page.php';
 require_once 'include/common.php';
 require_once 'include/config.php';
 
+if(DEBUG) {
+    ini_set('display_errors',1); 
+    error_reporting(E_ALL);
+}
+
 $template_fallbacks = array(
     // 'template_name' => 'template_to_use_instead'
-    'admin_head' => 'head',
-    'admin_foot' => 'foot',
-    'archive_head' => 'head',
-    'archive_foot' => 'foot',
-    'comic_head' => 'head',
-    'comic_foot' => 'foot',
-    'chapter_head' => 'head',
-    'chapter_foot' => 'foot',
-    'rant_head' => 'head',
-    'rant_foot' => 'foot',
+    'admin_head.php' => 'head.php',
+    'admin_foot.php' => 'foot.php',
+    'archive_head.php' => 'head.php',
+    'archive_foot.php' => 'foot.php',
+    'comic_head.php' => 'head.php',
+    'comic_foot.php' => 'foot.php',
+    'chapter_head.php' => 'head.php',
+    'chapter_foot.php' => 'foot.php',
+    'rant_head.php' => 'head.php',
+    'rant_foot.php' => 'foot.php',
 );
 
 $request = isset($_REQUEST['q']) && $_REQUEST['q'] && $_REQUEST['q'] != '/' ? $_REQUEST['q'] : 'index';
@@ -30,7 +35,8 @@ $request = array_values(array_filter(explode('/', $request)));
 
 $page = new Page();
 $page->title = $config['title'];
-$page->add_css("template/{$config['template']}/style.css");
+// $page->add_css("template/{$config['template']}/style.css");
+$page->add_css(template_path('style.css'));
 $page->set_start_time($start_time);
 
 switch($request[0]) {

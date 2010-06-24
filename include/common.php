@@ -28,21 +28,30 @@ if (get_magic_quotes_gpc()) {
  * @return void
  */
 function template($name, $vars = false, $template_dir = false, $allow_fallback = true) {
-    global $config, $page, $template_fallbacks;
-    if(!$template_dir) {
-        $template_dir = $config['template'];
-    }
-    $template = BASEDIR . "/template/{$template_dir}/{$name}.php";
-    if(file_exists($template)) {
+    global $config, $page;
+    if($file = template_path("{$name}.php", $template_dir, $allow_fallback)) {
         if(is_array($vars)) {
             extract($vars);
         }
-        include $template;
+        if(isset($page)) { $page->debug('template', $file); }
+        include $file;
         return true;
-    } elseif(isset($template_fallbacks[$name]) && template($template_fallbacks[$name], $vars, $template_dir, false)) {
-        return true;
+    }
+    return false;
+}
+
+function template_path($filename, $template_dir = false, $allow_fallback = true) {
+   global $config, $template_fallbacks;
+    if(!$template_dir) {
+        $template_dir = $config['template'];
+    }
+    $template = "template/{$template_dir}/{$filename}";
+    if(file_exists(BASEDIR . "/" . $template)) {
+        return $template;
+    } elseif(isset($template_fallbacks[$filename]) && $template = template_path($template_fallbacks[$filename], $template_dir, false)) {
+        return $template;
     } elseif($template_dir != 'default') {
-        return template($name, $vars, 'default');
+        return template_path($filename, 'default');
     }
     return false;
 }
