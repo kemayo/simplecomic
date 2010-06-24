@@ -1,5 +1,5 @@
 <?php template('admin_head'); ?>
-<div>For the purpose of comic/rant publishing, the date is: <?=date('Y-m-d H:i:s')?></div>
+<div>For the purpose of comic/rant publishing, the date is: <?php echo date('Y-m-d H:i:s'); ?></div>
 <h3>Comics</h3>
 <ul>
 <?php
