@@ -3,8 +3,8 @@ $("input.datetime").each(function() {
     var $this = $(this);
     var datetime = $this.val().split(' ');
     $this.hide();
-    var date_input = $('<input type="date" />').val(datetime[0]);//dateinput({value: datetime[0]});
-    var time_input = $('<input>').val(datetime[1]);
+    var date_input = $('<input/>').val(datetime[0]);//dateinput({value: datetime[0]});
+    var time_input = $('<input/>').val(datetime[1]);
     $this.after(time_input).after(date_input);
     date_input.dateinput({format: 'yyyy-mm-dd'});
     var update_date = function() {
