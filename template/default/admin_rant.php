@@ -13,7 +13,7 @@
     <small>YYYY-MM-DD HH:MM:SS. Rants dated in the future will not be published until that time.</small>
 
     <label>Text</label>
-    <textarea name="text" rows="8" cols="40"><?php echo htmlentities($text); ?></textarea>
+    <textarea name="text" rows="8" cols="40"><?php echo isset($text) ? htmlentities($text) : ''; ?></textarea>
 
     <div class="submit-block">
         <input type="submit" name="submit" value="Save" />

@@ -58,8 +58,10 @@ switch($request[0]) {
                 $comic = $db->fetch_first("SELECT * FROM comics WHERE pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date DESC LIMIT 1");
                 break;
         }
-        $comic['text'] = fetch_text($comic['comicid']);
-        $comic['nav'] = fetch_navigation($comic);
+        if($comic) {
+            $comic['text'] = fetch_text($comic['comicid']);
+            $comic['nav'] = fetch_navigation($comic);
+        }
         $rant = $db->fetch_first("SELECT * FROM rants r LEFT JOIN rants_text t ON r.rantid = t.rantid WHERE pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date DESC LIMIT 1");
         template('index', array(
             'comic' => $comic,

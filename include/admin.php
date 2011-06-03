@@ -35,7 +35,7 @@ $page->add_js(template_path('admin.js'));
 $page->add_css(template_path('cal.css'));
 $page->add_breadcrumb("Admin", "admin/");
 
-switch($request[1]) {
+switch(isset($request[1]) ? $request[1] : '') {
 case 'comic':
     // editing an individual comic
     $comic = array();
