@@ -116,6 +116,11 @@ div.submit-block button.delete {
     cursor:pointer;
     margin-top:1ex;
 }
+div.preview_container {
+    padding: 1em 0;
+    margin: 1em 0;
+    border-bottom: 1px solid black;
+}
 
 div.foot {
     margin-top:2em;

@@ -1,5 +1,20 @@
 <?php template('admin_head'); ?>
 
+<?php
+
+if(isset($preview) && $preview) {
+    ?><div class="preview_container"><?php
+    template('rant', array(
+        'rantid' => $rantid,
+        'title' => $title,
+        'pub_date' => $pub_date,
+        'text' => $text,
+    ));
+    ?></div><?php
+}
+
+?>
+
 <form action="" method="POST" enctype="multipart/form-data">
     <?php echo authtoken_input(); ?>
     <?php if(isset($rantid) && $rantid && $rantid != 'new') { ?>
@@ -16,6 +31,7 @@
     <textarea name="text" rows="8" cols="40"><?php echo isset($text) ? htmlentities($text) : ''; ?></textarea>
 
     <div class="submit-block">
+        <button name="preview" class="preview" value="1">Preview</button>
         <input type="submit" name="submit" value="Save" />
         <?php if(isset($rantid) && $rantid && $rantid != 'new') { ?>
         <button name="delete" class="delete" value="1">Delete</button>

@@ -144,30 +144,41 @@ case 'rant':
         $db->query("DELETE FROM rants WHERE rantid = %d", $request[2]);
         $db->query("DELETE FROM rants_text WHERE rantid = %d", $request[2]);
         redirect("admin/", "Rant {$request[2]} deleted");
-    } elseif(isset($_POST['submit'])) {
+    } elseif(isset($_POST['submit']) || isset($_POST['preview'])) {
         $pub_date = strtotime(date('Y-m-d H:i:s', strtotime($_POST['pub_date'])));
         if(!$pub_date) {
             die_error("Bad date");
         }
-        if($rant) {
-            $rantid = $rant['rantid'];
-            $db->query("UPDATE rants SET title = %s, pub_date = %s WHERE rantid = %d",
-                array($_POST['title'], $pub_date, $rantid));
+        if(isset($_POST['preview']) && $_POST['preview']) {
+            $rant = array(
+                'rantid' => 'preview',
+                'title' => $_POST['title'],
+                'pub_date' => $pub_date,
+                'text' => $_POST['text'],
+                'preview' => true,
+            );
         } else {
-            $rantid = $db->insert_id(
-                "INSERT INTO rants (`title`, `pub_date`) VALUES (%s, %s)",
-                array($_POST['title'], $pub_date));
-        }
-        if(!$rantid) {
-            die_error("Error saving");
-        }
-        $db->query(
-            "REPLACE INTO rants_text (rantid, text) VALUES (%d, %s)",
-            array($rantid, $_POST['text']));
+            if($rant) {
+                $rantid = $rant['rantid'];
+                $db->query("UPDATE rants SET title = %s, pub_date = %s WHERE rantid = %d",
+                    array($_POST['title'], $pub_date, $rantid));
+            } else {
+                $rantid = $db->insert_id(
+                    "INSERT INTO rants (`title`, `pub_date`) VALUES (%s, %s)",
+                    array($_POST['title'], $pub_date));
+            }
+            if(!$rantid) {
+                die_error("Error saving");
+            }
+            $db->query(
+                "REPLACE INTO rants_text (rantid, text) VALUES (%d, %s)",
+                array($rantid, $_POST['text']));
 
-        redirect("admin/rant/".$rantid, "Saving rant was successful.");
-        die;
+            redirect("admin/rant/".$rantid, "Saving rant was successful.");
+            die;
+        }
     }
+
     template('admin_rant', $rant);
     break;
 default:
