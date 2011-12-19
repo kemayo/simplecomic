@@ -3,6 +3,8 @@
     RewriteRule ^(.*/)?\.git/ - [F,L]
     RewriteRule ^(.*/)?include/ - [F,L]
     RewriteRule ^(.*/)?template/.+\.php$ - [F,L]
+
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
     
     # Rewrite current-style URLs of the form 'index.php?q=x'.
     RewriteCond %{REQUEST_FILENAME} !-f 
