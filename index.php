@@ -123,7 +123,15 @@ switch($request[0]) {
         break;
     case 'archive':
         // full strip listing
-        $comics = $db->fetch("SELECT c.*, ch.title AS chapter_title, ch.slug AS chapter_slug FROM comics c LEFT JOIN chapters ch ON c.chapterid = ch.chapterid WHERE c.pub_date <= UNIX_TIMESTAMP() ORDER BY c.pub_date ASC");
+        $query = "SELECT c.*, ch.title AS chapter_title, ch.slug AS chapter_slug FROM comics c LEFT JOIN chapters ch ON c.chapterid = ch.chapterid WHERE c.pub_date <= UNIX_TIMESTAMP() ORDER BY ";
+        switch (config('archive_order', 'date')) {
+            case 'chapter':
+                $query .= "ch.order ASC, ";
+            case 'date':
+                $query .= "c.pub_date ASC";
+                break;
+        }
+        $comics = $db->fetch($query);
         template('archive', array('comics' => $comics));
         break;
     case 'chapters':
