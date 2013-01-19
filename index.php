@@ -16,6 +16,8 @@ if(DEBUG) {
     error_reporting(E_ALL);
 }
 
+define('STATUS_CLOSED', 1);
+
 $template_fallbacks = array(
     // 'template_name' => 'template_to_use_instead'
     'admin_head.php' => 'head.php',

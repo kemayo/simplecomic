@@ -147,8 +147,12 @@ case 'chapter':
                 }
                 redirect("admin#chapter" . $chapter['chapterid']);
             }
-            $db->query("UPDATE chapters SET title = %s, slug = %s WHERE chapterid = %d",
-                array($_POST['title'], $_POST['slug'], $chapterid));
+            $status = 0;
+            if(!empty($_POST['closed'])) {
+                $status = STATUS_CLOSED;
+            }
+            $db->query("UPDATE chapters SET title = %s, slug = %s, status = %d WHERE chapterid = %d",
+                array($_POST['title'], $_POST['slug'], $status, $chapterid));
         } else {
             $order = $db->quick("SELECT MAX(order) + 1 FROM chapters");
             $chapterid = $db->insert_id(

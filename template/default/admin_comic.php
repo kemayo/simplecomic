@@ -24,13 +24,30 @@ if(!isset($text)) {
 
     <label>Chapter</label>
     <select name="chapterid">
-        <?php foreach($chapters as $c) {
+        <?php
+        $closed = array();
+        foreach($chapters as $c) {
+            if($c['status'] == STATUS_CLOSED) {
+                $closed[] = $c;
+                continue;
+            }
             echo '<option value="', $c['chapterid'], '"';
             if($c['chapterid'] == $chapterid) {
                 echo ' selected="selected"';
             }
             echo '>', $c['title'], '</option>', "\n";
-        } ?>
+        }
+        if($closed) {
+            echo '<option disabled="disabled">---CLOSED---</option>';
+            foreach($closed as $c) {
+                echo '<option value="', $c['chapterid'], '"';
+                if($c['chapterid'] == $chapterid) {
+                    echo ' selected="selected"';
+                }
+                echo '>', $c['title'], '</option>', "\n";
+            }
+        }
+        ?>
     </select>
 
     <label>Filename</label>

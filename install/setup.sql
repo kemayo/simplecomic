@@ -21,7 +21,8 @@ INDEX `bydate` ( `pub_date` )
  `title` VARCHAR( 255 ) NOT NULL ,
  `slug` VARCHAR( 32 ) NOT NULL ,
  `order` TINYINT NOT NULL ,
- `parentid` INT NOT NULL
+ `parentid` INT NOT NULL ,
+ `status` TINYINT NOT NULL
  ) ENGINE = MYISAM;
 
 CREATE TABLE  `chapters_text` (

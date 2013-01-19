@@ -13,6 +13,13 @@
     <label>Description</label>
     <textarea name="description" rows="8" cols="40"><?php echo htmlentities($description); ?></textarea>
 
+    <label>Closed</label>
+    <input name="closed" type="checkbox" value="1"<?php
+    if($status == STATUS_CLOSED) {
+        echo ' checked="checked"';
+    }
+    ?>>
+
     <input type="submit" name="submit" value="save" />
 </form>
 
