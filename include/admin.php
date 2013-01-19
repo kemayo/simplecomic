@@ -5,17 +5,17 @@ if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
 }
 
 if (
-    isset($config['adminuser'])
+    config('adminuser')
     &&
     !(
         isset($_SERVER['PHP_AUTH_USER'])
         &&
-        $_SERVER['PHP_AUTH_USER'] == $config['adminuser']
+        $_SERVER['PHP_AUTH_USER'] == config('adminuser')
         &&
-        $_SERVER['PHP_AUTH_PW'] == $config['adminpass']
+        $_SERVER['PHP_AUTH_PW'] == config('adminpass')
     )
 ) {
-    header('WWW-Authenticate: Basic realm="'.$config['title'].'"');
+    header('WWW-Authenticate: Basic realm="'.config('title', "Simplecomic").'"');
     header('HTTP/1.0 401 Unauthorized');
     echo 'No access for you.';
     exit;
@@ -71,7 +71,7 @@ case 'comic':
                 die_error("There is already a comic with that exact date. Please choose a different date.");
             }
             if(isset($_POST['filename']) && $_POST['filename']) {
-                if(!file_exists(BASEDIR.$config['comicpath'].'/'.$_POST['filename'])) {
+                if(!file_exists(BASEDIR . config('comicpath') . '/' . $_POST['filename'])) {
                     die_error("Comic file does not exist");
                 }
                 $filename = $_POST['filename'];
@@ -79,7 +79,7 @@ case 'comic':
                 if($_FILES['comicfile']['error'] == UPLOAD_ERR_NO_FILE) {
                     die_error("No file uploaded");
                 }
-                $uploadpath = BASEDIR.$config['comicpath'].'/'.basename($_FILES['comicfile']['name']);
+                $uploadpath = BASEDIR . config('comicpath') . '/' . basename($_FILES['comicfile']['name']);
                 if(file_exists($uploadpath)) {
                     die_error("File exists");
                 }

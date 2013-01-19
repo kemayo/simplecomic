@@ -17,7 +17,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 ?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <id><?php echo $feed_url; ?></id>
-    <title><?php echo $config['title']; ?></title>
+    <title><?php echo config('title', "Simplecomic"); ?></title>
     <updated><?php echo date('c', $updated); ?></updated>
     <link rel="self" type="application/atom+xml" href="<?php echo $feed_url; ?>" />
     <?php foreach($updates as $update) {
@@ -42,12 +42,12 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
             <link rel="alternate" type="text/html" href="<?php echo $entry_url;?>" />
             <title><![CDATA[<?php echo $type . ': ' . $update['title']?>]]></title>
             <author>
-                <name><![CDATA[<?php echo $config['author'];?>]]></name>
-                <uri><?php echo $config['author_url'] ? $config['author_url'] : url('', true);?></uri>
+                <name><![CDATA[<?php echo config('author');?>]]></name>
+                <uri><?php echo config('author_url', url('', true));?></uri>
             </author>
             <published><?php echo date('c', $update['pub_date']);?></published>
             <updated><?php echo date('c', $update['pub_date']);?></updated>
-            <?php if($config['full_feed']) { ?>
+            <?php if(config('full_feed')) { ?>
             <content type="html"><![CDATA[<?php
             switch($update['type']) {
                 case 'comic':

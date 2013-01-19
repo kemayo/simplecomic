@@ -28,7 +28,7 @@ if (get_magic_quotes_gpc()) {
  * @return void
  */
 function template($name, $vars = false, $template_dir = false, $allow_fallback = true) {
-    global $config, $page;
+    global $page;
     if($file = template_path("{$name}.php", $template_dir, $allow_fallback)) {
         if(is_array($vars)) {
             extract($vars);
@@ -41,9 +41,9 @@ function template($name, $vars = false, $template_dir = false, $allow_fallback =
 }
 
 function template_path($filename, $template_dir = false, $allow_fallback = true) {
-   global $config, $template_fallbacks;
+   global $template_fallbacks;
     if(!$template_dir) {
-        $template_dir = $config['template'];
+        $template_dir = config('template');
     }
     $template = "template/{$template_dir}/{$filename}";
     if(file_exists(BASEDIR . "/" . $template)) {
@@ -68,13 +68,12 @@ function template_path($filename, $template_dir = false, $allow_fallback = true)
  *
  */
 function url($url, $absolute = false, $always_pretty = false) {
-    global $config;
     if(preg_match("!^([^:]+://|/)!", $url)) {
         // external link
         return $url;
     }
     $beginning = ($absolute ? current_domain() : '') . BASEURL . '/';
-    if(!$url || $config['pretty_urls'] || $always_pretty) {
+    if(!$url || config('pretty_urls') || $always_pretty) {
         return  $beginning . $url;
     }
     return $beginning . "/index.php?q=" . $url;
@@ -177,8 +176,7 @@ function current_url() {
 }
 
 function authtoken($salt = '') {
-    global $config;
-    return md5($salt . $config['adminuser'] . $config['adminpass']);
+    return md5($salt . config('adminuser') . config('adminpass'));
 }
 
 function authtoken_input($salt = '') {
@@ -186,4 +184,10 @@ function authtoken_input($salt = '') {
     return '<input type="hidden" name="authtoken" value="' . $authtoken . '" />';
 }
 
-?>
+function config($key, $default = false) {
+    global $config;
+    if (isset($config[$key])) {
+        return $config[$key];
+    }
+    return $default;
+}

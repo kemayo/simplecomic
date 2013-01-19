@@ -35,7 +35,7 @@ if(!isset($text)) {
 
     <label>Filename</label>
     <input name="filename" value="<?php echo isset($filename) ? $filename : ''; ?>" />
-    <small>The name of a file in the <var><?php echo $config['comicpath']; ?></var> directory.</small>
+    <small>The name of a file in the <var><?php echo config('comicpath'); ?></var> directory.</small>
 
     <?php if(!isset($comicid)) { ?>
     <label>Or: Upload file</label>

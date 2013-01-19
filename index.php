@@ -34,15 +34,15 @@ $request = isset($_REQUEST['q']) && $_REQUEST['q'] && $_REQUEST['q'] != '/' ? $_
 $request = array_values(array_filter(explode('/', $request)));
 
 $page = new Page();
-$page->title = $config['title'];
-// $page->add_css("template/{$config['template']}/style.css");
+$page->title = config('title');
+// $page->add_css("template/{config('template')}/style.css");
 $page->add_css(template_path('style.css'));
 $page->set_start_time($start_time);
 
 switch($request[0]) {
     case 'index':
         // frontpage
-        $selection_style = isset($config['frontpage_comic']) ? $config['frontpage_comic'] : 'latest';
+        $selection_style = config('frontpage_comic', 'latest');
         $page->debug('selection_style', $selection_style);
         switch($selection_style) {
             case 'first':
@@ -74,7 +74,7 @@ switch($request[0]) {
             // image display!
             $comic = $db->fetch_first("SELECT * FROM comics WHERE comicid = %d AND pub_date <= UNIX_TIMESTAMP()", $request[2]);
             if($comic) {
-                $file = BASEDIR . $config['comicpath'] . '/' . $comic['filename'];
+                $file = BASEDIR . config('comicpath') . '/' . $comic['filename'];
                 if(file_exists($file)) {
                     $mime = array(
                         'gif'  => 'image/gif',
