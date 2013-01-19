@@ -33,7 +33,7 @@ if (
     die_error("Post authentication failed.");
 }
 
-$page->add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js');
+$page->add_js('https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js');
 $page->add_js('http://cdn.jquerytools.org/1.2.3/form/jquery.tools.min.js');
 $page->add_js(template_path('admin.js'));
 $page->add_css(template_path('cal.css'));
@@ -116,6 +116,37 @@ case 'chapter':
     if(isset($_POST['submit'])) {
         if($chapter) {
             $chapterid = $chapter['chapterid'];
+            if(in_array($request[3], array('up', 'down'))) {
+                // for reference: the list on the admin page is "ORDER BY order DESC", so
+                // "up" means increase the order, "down" means decrease the order
+                switch($request[3]) {
+                    case 'up':
+                        // can we actually go higher?
+                        $max = $db->quick("SELECT MAX(order) FROM chapters");
+                        if($chapter['order'] == $max) {
+                            continue;
+                        }
+
+                        // first: move the one next in the list up
+                        $db->query("UPDATE chapters SET `order` = %d WHERE `order` = %d",
+                            array($chapter['order'], $chapter['order'] + 1));
+                        // now: move the selected chapter into the old one's place
+                        $db->query("UPDATE chapters SET `order` = %d WHERE chapterid = %d",
+                            array($chapter['order'] + 1, $chapterid));
+                        break;
+                    case 'down':
+                        if($chapter['order'] == 0) {
+                            continue;
+                        }
+                        $db->query("UPDATE chapters SET `order` = %d WHERE `order` = %d",
+                            array($chapter['order'], $chapter['order'] - 1));
+                        // now: move the selected chapter into the old one's place
+                        $db->query("UPDATE chapters SET `order` = %d WHERE `chapterid` = %d",
+                            array($chapter['order'] - 1, $chapterid));
+                        break;
+                }
+                redirect("admin#chapter" . $chapter['chapterid']);
+            }
             $db->query("UPDATE chapters SET title = %s, slug = %s WHERE chapterid = %d",
                 array($_POST['title'], $_POST['slug'], $chapterid));
         } else {

@@ -34,15 +34,24 @@ foreach($rants as $c) {
 ?>
 </ul>
 
-<h3>Chapters</h3>
+<h3 id="chapters">Chapters</h3>
 <ul>
 <?php
 echo '<li><a href="', url('admin/chapter/new'), '">Add a new one</a></li>';
+$num_chapters = count($chapters);
 foreach($chapters as $c) {
-    echo '<li>';
-    echo '<a href="', url('admin/chapter/'.$c['chapterid']), '">';
+    echo '<li>', $c['order'], ': ';
+    echo '<a href="', url('admin/chapter/'.$c['chapterid']), '" name="chapter', $c['chapterid'], '">';
     echo $c['title'];
-    echo '</a>';
+    echo '</a> ';
+    if ($c['order'] > 1) {
+        // move-up
+        echo post_link('admin/chapter/'.$c['chapterid'].'/down', 'down');
+    }
+    if ($c['order'] < $num_chapters) {
+        // move-down
+        echo post_link('admin/chapter/'.$c['chapterid'].'/up', 'up');
+    }
     echo '</li>';
 }
 ?>

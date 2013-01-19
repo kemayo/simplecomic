@@ -12,6 +12,7 @@ $config = array(
     'full_feed' => true, // means that comic images and rants appear in the feed
     'pretty_urls' => true,
     'frontpage_comic' => 'latest', // 'latest', 'first', or 'first-of-latest-day'
+    'archive_order' => 'chapter', // 'date', 'chapter'
     'adminuser' => "admin",
     'adminpass' => "admin",
 );

@@ -184,6 +184,14 @@ function authtoken_input($salt = '') {
     return '<input type="hidden" name="authtoken" value="' . $authtoken . '" />';
 }
 
+function post_link($url, $label) {
+    ?><form action="<?php echo url($url); ?>" method="POST" enctype="multipart/form-data" class="post-link"><?php
+    echo authtoken_input();
+    ?><input type="submit" name="submit" value="<?php echo $label; ?>"><?php
+    ?></form><?php
+
+}
+
 function config($key, $default = false) {
     global $config;
     if (isset($config[$key])) {
