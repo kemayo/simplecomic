@@ -159,7 +159,7 @@ function compare_updates($a, $b) {
 
 function current_domain() {
     $url = 'http';
-    if ($_SERVER["HTTPS"] == "on") {
+    if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") {
         $url .= "s";
     }
     $url .= "://";
