@@ -131,3 +131,11 @@ div.foot a {
     color:#ccc;
     text-decoration:none;
 }
+
+form.post-link {
+    display:inline;
+}
+form.post-link input {
+    display:inline;
+    margin-left:0;
+}
