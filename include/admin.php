@@ -153,6 +153,13 @@ case 'chapter':
             }
             $db->query("UPDATE chapters SET title = %s, slug = %s, status = %d WHERE chapterid = %d",
                 array($_POST['title'], $_POST['slug'], $status, $chapterid));
+
+            // A few sanity checks
+            $count = $db->quick("SELECT COUNT(*) FROM chapters WHERE `order` = %d", $chapter['order']);
+            if ($count > 1 || $chapter['order'] == 0) {
+                $order = $db->quick("SELECT MAX(`order`) + 1 FROM chapters");
+                $db->query("UPDATE chapters SET `order` = %d WHERE chapterid = %d", array($order, $chapterid));
+            }
         } else {
             $order = $db->quick("SELECT MAX(`order`) + 1 FROM chapters");
             $chapterid = $db->insert_id(
