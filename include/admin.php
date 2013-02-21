@@ -122,7 +122,7 @@ case 'chapter':
                 switch($request[3]) {
                     case 'up':
                         // can we actually go higher?
-                        $max = $db->quick("SELECT MAX(order) FROM chapters");
+                        $max = $db->quick("SELECT MAX(`order`) FROM chapters");
                         if($chapter['order'] == $max) {
                             continue;
                         }
@@ -154,7 +154,7 @@ case 'chapter':
             $db->query("UPDATE chapters SET title = %s, slug = %s, status = %d WHERE chapterid = %d",
                 array($_POST['title'], $_POST['slug'], $status, $chapterid));
         } else {
-            $order = $db->quick("SELECT MAX(order) + 1 FROM chapters");
+            $order = $db->quick("SELECT MAX(`order`) + 1 FROM chapters");
             $chapterid = $db->insert_id(
                 "INSERT INTO chapters (`title`, `slug`, `order`) VALUES (%s, %s, %d)",
                 array($_POST['title'], $_POST['slug'], $order));
