@@ -113,7 +113,15 @@ case 'chapter':
             $chapter['description'] = $db->quick("SELECT description FROM chapters_text WHERE chapterid = %d", $request[2]);
         }
     }
-    if(isset($_POST['submit'])) {
+    if($chapter && isset($_POST['delete'])) {
+        $remaining = $db->quick("SELECT COUNT(*) FROM comics WHERE chapterid = %d", $request[2]);
+        if ($remaining > 0) {
+            die_error("Can't delete a chapter while it contains comics. This one has {$remaining} left.");
+        }
+        $db->query("DELETE FROM chapters WHERE chapterid = %d", $request[2]);
+        $db->query("DELETE FROM chapters_text WHERE chapterid = %d", $request[2]);
+        redirect("admin/", "Chapter {$request[2]} deleted");
+    } elseif(isset($_POST['submit'])) {
         if($chapter) {
             $chapterid = $chapter['chapterid'];
             if(in_array($request[3], array('up', 'down'))) {

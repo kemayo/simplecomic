@@ -20,7 +20,12 @@
     }
     ?>>
 
-    <input type="submit" name="submit" value="save" />
+    <div class="submit-block">
+        <input type="submit" name="submit" value="Save" />
+        <?php if(isset($chapterid) && $chapterid && $chapterid != 'new') { ?>
+        <button name="delete" class="delete" value="1">Delete</button>
+        <?php } ?>
+    </div>
 </form>
 
 <?php template('admin_foot'); ?>
