@@ -1,26 +1,5 @@
 <?php
 
-if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
-    list($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']) = explode(':' , base64_decode(substr($_SERVER['HTTP_AUTHORIZATION'], 6)));
-}
-
-if (
-    config('adminuser')
-    &&
-    !(
-        isset($_SERVER['PHP_AUTH_USER'])
-        &&
-        $_SERVER['PHP_AUTH_USER'] == config('adminuser')
-        &&
-        $_SERVER['PHP_AUTH_PW'] == config('adminpass')
-    )
-) {
-    header('WWW-Authenticate: Basic realm="'.config('title', "Simplecomic").'"');
-    header('HTTP/1.0 401 Unauthorized');
-    echo 'No access for you.';
-    exit;
-}
-
 if (
     $_POST
     &&
@@ -38,6 +17,26 @@ $page->add_js('http://cdn.jquerytools.org/1.2.3/form/jquery.tools.min.js');
 $page->add_js(template_path('admin.js'));
 $page->add_css(template_path('cal.css'));
 $page->add_breadcrumb("Admin", "admin/");
+
+$valid_auth = sha1(config('adminuser').config('adminpass'));
+if (config('adminuser') && (empty($_COOKIE['admin']) || $_COOKIE['admin'] !== $valid_auth)) {
+    if (isset($_POST['adminuser'], $_POST['adminpass']) && sha1($_POST['adminuser'].$_POST['adminpass']) == $valid_auth) {
+        setcookie('admin', $valid_auth);
+        redirect("admin/", "Welcome");
+    } else {
+        header('HTTP/1.0 401 Unauthorized');
+        ?>No access for you.<br><br>
+
+        <form method="POST">
+            <?php echo authtoken_input(); ?>
+            Username: <input name="adminuser"><br>
+            Password: <input name="adminpass" type="password"><br>
+            <input type="submit" value="Login">
+        </form>
+        <?php
+    }
+    exit;
+}
 
 switch(isset($request[1]) ? $request[1] : '') {
 case 'comic':
