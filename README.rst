@@ -27,7 +27,8 @@ Features
 Installing
 ----------
 
-1. Put it on your webserver.
+1. Put it on your webserver. I'd do it as a ``git clone`` of this, so you
+   can update it easily, but that's up to you.
 2. Create a database and run all of the queries in ``install/setup.sql``
 3. Copy ``include/config.default.php`` to ``include/config.php``
 4. Edit ``include/config.php`` to contain appropriate values.
@@ -69,6 +70,8 @@ to take advantage of new features.
 
 If you've made changes to the core files or the default templates, you
 are on your own. Read the changelogs, would be my recommendation.
+
+If you followed my advice about ``git clone``, just do ``git pull``.
 
 Todo
 ----
