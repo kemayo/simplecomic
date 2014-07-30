@@ -1,11 +1,13 @@
  CREATE TABLE `comics` (
 `comicid` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `title` VARCHAR( 255 ) NOT NULL ,
+`slug` VARCHAR( 32 ) NOT NULL ,
 `filename` VARCHAR( 255 ) NOT NULL ,
 `pub_date` INT NOT NULL ,
 `chapterid` INT NOT NULL ,
 INDEX `bychapter` ( `chapterid` , `pub_date` ) ,
-INDEX `bydate` ( `pub_date` )
+INDEX `bydate` ( `pub_date` ) ,
+INDEX `byslug` ( `slug` )
 ) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_general_ci;
 
  CREATE TABLE  `comics_text` (
@@ -22,7 +24,8 @@ INDEX `bydate` ( `pub_date` )
  `slug` VARCHAR( 32 ) NOT NULL ,
  `order` TINYINT NOT NULL ,
  `parentid` INT NOT NULL ,
- `status` TINYINT NOT NULL
+ `status` TINYINT NOT NULL ,
+ INDEX `byslug` ( `slug` )
  ) ENGINE = MYISAM;
 
 CREATE TABLE  `chapters_text` (

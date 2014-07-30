@@ -22,6 +22,9 @@ if(!isset($text)) {
     <input name="pub_date" class="datetime" value="<?php echo date('Y-m-d H:i:s', isset($pub_date) ? $pub_date : time()); ?>" />
     <small>YYYY-MM-DD HH:MM:SS. Comics dated in the future will not be published until that time.</small>
 
+    <label>Slug</label>
+    <input name="slug" value="<?php echo isset($slug) ? $slug : ''; ?>" />
+
     <label>Chapter</label>
     <select name="chapterid">
         <?php

@@ -1,6 +1,7 @@
 index
 
 comic/[id]
+comic/[slug]
 chapters/
 chapter/[slug]
 rants/

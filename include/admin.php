@@ -58,13 +58,19 @@ case 'comic':
         if(!$pub_date) {
             die_error("Bad date");
         }
+        if (!empty($_POST['slug']) || is_numeric($_POST['slug'])) {
+            die_error("Slug can't be just a number. That confuses things.");
+        }
         if($comic) {
             $comicid = $comic['comicid'];
             if($db->quick("SELECT comicid FROM comics WHERE pub_date = %d AND comicid != %d", array($pub_date, $comicid))) {
                 die_error("There is already a comic with that exact date. Please choose a different date.");
             }
-            $db->query("UPDATE comics SET title=%s, pub_date=%d, filename=%s, chapterid=%d WHERE comicid=%d",
-                array($_POST['title'], $pub_date, $_POST['filename'], $_POST['chapterid'], $comicid));
+            if($db->quick("SELECT comicid FROM comics WHERE slug = %s AND comicid != %d", array($_POST['slug'], $comicid))) {
+                die_error("There is already a comic with that slug. Please choose a different one.");
+            }
+            $db->query("UPDATE comics SET title=%s, slug=%s, pub_date=%d, filename=%s, chapterid=%d WHERE comicid=%d",
+                array($_POST['title'], $_POST['slug'], $pub_date, $_POST['filename'], $_POST['chapterid'], $comicid));
         } else {
             if($db->quick("SELECT comicid FROM comics WHERE pub_date = %d", $pub_date)) {
                 die_error("There is already a comic with that exact date. Please choose a different date.");
@@ -91,8 +97,8 @@ case 'comic':
                 die_error("No filename");
             }
             $comicid = $db->insert_id(
-                "INSERT INTO comics (title, pub_date, filename, chapterid) VALUES (%s, %d, %s, %d)",
-                array($_POST['title'], $pub_date, $filename, $_POST['chapterid']));
+                "INSERT INTO comics (title, slug, pub_date, filename, chapterid) VALUES (%s, %d, %s, %d)",
+                array($_POST['title'], $_POST['slug'], $pub_date, $filename, $_POST['chapterid']));
         }
         $db->query(
             "REPLACE INTO comics_text (comicid, description, transcript, alt_text) VALUES (%d, %s, %s, %s)",
@@ -157,6 +163,9 @@ case 'chapter':
             $status = 0;
             if(!empty($_POST['closed'])) {
                 $status = STATUS_CLOSED;
+            }
+            if($db->quick("SELECT chapterid FROM chapters WHERE slug = %s AND chapterid != %d", array($_POST['slug'], $chapterid))) {
+                die_error("There is already a chapter with that slug. Please choose a different one.");
             }
             $db->query("UPDATE chapters SET title = %s, slug = %s, status = %d WHERE chapterid = %d",
                 array($_POST['title'], $_POST['slug'], $status, $chapterid));

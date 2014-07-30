@@ -113,13 +113,17 @@ function fetch_navigation($comic) {
     global $db;
     // comics that were published at the exact moment that this one was:
     // $comics_now = $db->quick("SELECT COUNT(*) FROM comics WHERE pub_date = %d", $comic['pub_date']);
-    return array(
-        'current' => $comic['comicid'],
-        'prev' => $db->quick("SELECT comicid FROM comics WHERE pub_date < %d AND pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date DESC LIMIT 1", $comic['pub_date']),
-        'next' => $db->quick("SELECT comicid FROM comics WHERE pub_date > %d AND pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date ASC LIMIT 1", $comic['pub_date']),
-        'first' => $db->quick("SELECT comicid FROM comics WHERE pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date ASC LIMIT 1"),
-        'last' => $db->quick("SELECT comicid FROM comics WHERE pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date DESC LIMIT 1"),
-    );
+    $prev_comic = $db->fetch_first("SELECT comicid, slug FROM comics WHERE pub_date < %d AND pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date DESC LIMIT 1", $comic['pub_date']);
+    $next_comic = $db->fetch_first("SELECT comicid, slug FROM comics WHERE pub_date > %d AND pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date ASC LIMIT 1", $comic['pub_date']);
+    $first_comic = $db->fetch_first("SELECT comicid, slug FROM comics WHERE pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date ASC LIMIT 1");
+    $last_comic = $db->fetch_first("SELECT comicid, slug FROM comics WHERE pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date DESC LIMIT 1");
+
+    $current = $comic['slug'] ?: $comic['comicid'];
+    $prev = $prev_comic['slug'] ?: $prev_comic['comicid'];
+    $next = $next_comic['slug'] ?: $next_comic['comicid'];
+    $first = $first_comic['slug'] ?: $first_comic['comicid'];
+    $last = $last_comic['slug'] ?: $last_comic['comicid'];
+    return compact('current', 'prev', 'next', 'first', 'last');
 }
 
 function fetch_text($comicid) {

@@ -115,7 +115,11 @@ switch($request[0]) {
             die;
         }
         // comic page
-        $comic = $db->fetch_first("SELECT * FROM comics WHERE comicid = %d AND pub_date <= UNIX_TIMESTAMP()", $request[1]);
+        if (!is_numeric($request[1])) {
+            $comic = $db->fetch_first("SELECT * FROM comics WHERE slug = %s AND pub_date <= UNIX_TIMESTAMP()", $request[1]);
+        } else {
+            $comic = $db->fetch_first("SELECT * FROM comics WHERE comicid = %d AND pub_date <= UNIX_TIMESTAMP()", $request[1]);
+        }
         if(!$comic) {
             redirect("");
         }
