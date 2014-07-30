@@ -58,7 +58,7 @@ case 'comic':
         if(!$pub_date) {
             die_error("Bad date");
         }
-        if (!empty($_POST['slug']) || is_numeric($_POST['slug'])) {
+        if (!empty($_POST['slug']) || is_numeric($_POST['slug']) || !preg_match('/\w+/', $_POST['slug'])) {
             die_error("Slug can't be just a number. That confuses things.");
         }
         if($comic) {
@@ -66,7 +66,7 @@ case 'comic':
             if($db->quick("SELECT comicid FROM comics WHERE pub_date = %d AND comicid != %d", array($pub_date, $comicid))) {
                 die_error("There is already a comic with that exact date. Please choose a different date.");
             }
-            if($db->quick("SELECT comicid FROM comics WHERE slug = %s AND comicid != %d", array($_POST['slug'], $comicid))) {
+            if($_POST['slug'] && $db->quick("SELECT comicid FROM comics WHERE slug = %s AND comicid != %d", array($_POST['slug'], $comicid))) {
                 die_error("There is already a comic with that slug. Please choose a different one.");
             }
             $db->query("UPDATE comics SET title=%s, slug=%s, pub_date=%d, filename=%s, chapterid=%d WHERE comicid=%d",
