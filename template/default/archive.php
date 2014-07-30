@@ -21,7 +21,7 @@ $current_chapter = -1;
             }
         ?>
         <li class="comic">
-            <a href="<?php echo url('comic/'.$comic['comicid']); ?>">
+            <a href="<?php echo url($comic); ?>">
                 <?php echo date('Y-m-d', $comic['pub_date']); ?>:
                 <?php echo $comic['title']; ?>
             </a>

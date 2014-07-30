@@ -68,6 +68,15 @@ function template_path($filename, $template_dir = false, $allow_fallback = true)
  *
  */
 function url($url, $absolute = false, $always_pretty = false) {
+    if(is_array($url)) {
+        if(!empty($url['comicid'])) {
+            $url = "comic/" . ($url['slug'] ?: $url['comicid']);
+        } elseif (!empty($url['chapterid'])) {
+            $url = "chapter/" . $url['slug'];
+        } else {
+            $url = "";
+        }
+    }
     if(preg_match("!^([^:]+://|/)!", $url)) {
         // external link
         return $url;
