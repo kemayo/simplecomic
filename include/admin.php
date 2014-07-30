@@ -59,7 +59,7 @@ case 'comic':
             die_error("Bad date");
         }
         if (!empty($_POST['slug'])) {
-            if (is_numeric($_POST['slug']) || !preg_match('/^\w*$/', $_POST['slug'])) {
+            if (is_numeric($_POST['slug']) || !preg_match('/^[\w\-]*$/', $_POST['slug'])) {
                 die_error("Slug can be: any non-completely-numeric string of basic letters, digits, and underscores.");
             }
         }
