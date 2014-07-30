@@ -58,7 +58,7 @@ case 'comic':
         if(!$pub_date) {
             die_error("Bad date");
         }
-        if (!empty($_POST['slug']) || is_numeric($_POST['slug']) || !preg_match('/\w+/', $_POST['slug'])) {
+        if (!empty($_POST['slug']) || is_numeric($_POST['slug']) || !preg_match('/\w*/', $_POST['slug'])) {
             die_error("Slug can't be just a number. That confuses things.");
         }
         if($comic) {
