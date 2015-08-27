@@ -13,7 +13,6 @@ if (
 }
 
 $page->add_js('https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js');
-$page->add_js('http://cdn.jquerytools.org/1.2.3/form/jquery.tools.min.js');
 $page->add_js(template_path('admin.js'));
 $page->add_css(template_path('cal.css'));
 $page->add_breadcrumb("Admin", "admin/");
