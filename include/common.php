@@ -213,6 +213,6 @@ function config($key, $default = false) {
     return $default;
 }
 
-function default_datetime($datetime) {
+function default_datetime() {
     return strtotime(config('default_time', '00:00:00'));
 }
