@@ -24,7 +24,7 @@ if(isset($preview) && $preview) {
     <input name="title" value="<?php echo isset($title) ? $title : ''; ?>" />
 
     <label>Date</label>
-    <input name="pub_date" class="datetime" value="<?php echo date('Y-m-d H:i:s', isset($pub_date) ? $pub_date : time()); ?>" />
+    <input name="pub_date" class="datetime" value="<?php echo date('Y-m-d H:i:s', isset($pub_date) ? $pub_date : default_datetime()); ?>" />
     <small>YYYY-MM-DD HH:MM:SS. Rants dated in the future will not be published until that time.</small>
 
     <label>Text</label>

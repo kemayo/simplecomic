@@ -13,6 +13,7 @@ $config = array(
     'pretty_urls' => true,
     'frontpage_comic' => 'latest', // 'latest', 'first', or 'first-of-latest-day'
     'archive_order' => 'chapter', // 'date', 'chapter'
+    'default_time' => '00:00:00', // HH:MM:SS default time for new content
     'adminuser' => "admin",
     'adminpass' => "admin",
 );
