@@ -23,7 +23,7 @@ if(!isset($text)) {
     <small>YYYY-MM-DD HH:MM:SS. Comics dated in the future will not be published until that time.</small>
 
     <label>Slug</label>
-    <input name="slug" pattern="[\w\-]*" value="<?php echo isset($slug) ? $slug : ''; ?>" />
+    <input name="slug" type="text" title="any non-completely-numeric string of basic letters, digits, and underscores" pattern="[\w\-]*" value="<?php echo isset($slug) ? $slug : ''; ?>" />
 
     <label>Chapter</label>
     <select name="chapterid">
