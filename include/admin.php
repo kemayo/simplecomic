@@ -100,6 +100,9 @@ case 'comic':
             $comicid = $db->insert_id(
                 "INSERT INTO comics (title, slug, pub_date, filename, chapterid) VALUES (%s, %d, %s, %d)",
                 array($_POST['title'], $_POST['slug'], $pub_date, $filename, $_POST['chapterid']));
+            if(!$comicid) {
+                die_error("Couldn't create new comic");
+            }
         }
         $db->query(
             "REPLACE INTO comics_text (comicid, description, transcript, alt_text) VALUES (%d, %s, %s, %s)",
