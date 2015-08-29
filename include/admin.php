@@ -98,7 +98,7 @@ case 'comic':
                 die_error("No filename");
             }
             $comicid = $db->insert_id(
-                "INSERT INTO comics (title, slug, pub_date, filename, chapterid) VALUES (%s, %d, %s, %d)",
+                "INSERT INTO comics (title, slug, pub_date, filename, chapterid) VALUES (%s, %s, %d, %s, %d)",
                 array($_POST['title'], $_POST['slug'], $pub_date, $filename, $_POST['chapterid']));
             if(!$comicid) {
                 die_error("Couldn't create new comic");
