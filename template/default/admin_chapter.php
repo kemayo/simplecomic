@@ -8,7 +8,7 @@
     <input name="title" value="<?php echo isset($title) ? $title : ''; ?>" />
 
     <label>Slug</label>
-    <input name="slug" value="<?php echo isset($slug) ? $slug : ''; ?>" />
+    <input name="slug" pattern="[\w\-]*" value="<?php echo isset($slug) ? $slug : ''; ?>" />
 
     <label>Description</label>
     <textarea name="description" rows="8" cols="40"><?php echo htmlentities($description); ?></textarea>
