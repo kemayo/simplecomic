@@ -39,6 +39,8 @@ $page = new Page();
 $page->title = config('title');
 // $page->add_css("template/{config('template')}/style.css");
 $page->add_css(template_path('style.css'));
+// $page->add_js('https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js');
+$page->add_js(template_path('nav.js'));
 $page->set_start_time($start_time);
 
 switch($request[0]) {

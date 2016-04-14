@@ -24,13 +24,13 @@ if($first != $current) {
 }
 
 if($prev) {
-    echo '<li><a href="', url('comic/'.$prev), '">Prev</a></li>';
+    echo '<li><a href="', url('comic/'.$prev), '" rel="prev">Prev</a></li>';
 } else {
     echo '<li>Prev</li>';
 }
 
 if($next) {
-    echo '<li><a href="', url('comic/'.$next), '">Next</a></li>';
+    echo '<li><a href="', url('comic/'.$next), '" rel="next">Next</a></li>';
 } else {
     echo '<li>Next</li>';
 }
