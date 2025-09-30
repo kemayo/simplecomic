@@ -12,8 +12,10 @@ require_once 'include/common.php';
 require_once 'include/config.php';
 
 if(DEBUG) {
-    ini_set('display_errors',1); 
+    ini_set('display_errors', 1);
     error_reporting(E_ALL);
+} else {
+    ini_set('display_errors', 0);
 }
 
 define('STATUS_CLOSED', 1);
