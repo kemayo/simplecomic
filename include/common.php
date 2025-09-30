@@ -127,11 +127,11 @@ function fetch_navigation($comic) {
     $first_comic = $db->fetch_first("SELECT comicid, slug FROM comics WHERE pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date ASC LIMIT 1");
     $last_comic = $db->fetch_first("SELECT comicid, slug FROM comics WHERE pub_date <= UNIX_TIMESTAMP() ORDER BY pub_date DESC LIMIT 1");
 
-    $current = $comic['slug'] ?: $comic['comicid'];
-    $prev = $prev_comic['slug'] ?: $prev_comic['comicid'];
-    $next = $next_comic['slug'] ?: $next_comic['comicid'];
-    $first = $first_comic['slug'] ?: $first_comic['comicid'];
-    $last = $last_comic['slug'] ?: $last_comic['comicid'];
+    $current = !empty($comic) ? ($comic['slug'] ?: $comic['comicid']) : false;
+    $prev = !empty($prev_comic) ? ($prev_comic['slug'] ?: $prev_comic['comicid']) : false;
+    $next = !empty($next_comic) ? ($next_comic['slug'] ?: $next_comic['comicid']) : false;
+    $first = !empty($first_comic) ? ($first_comic['slug'] ?: $first_comic['comicid']) : false;
+    $last = !empty($last_comic) ? ($last_comic['slug'] ?: $last_comic['comicid']) : false;
     return compact('current', 'prev', 'next', 'first', 'last');
 }
 
