@@ -141,7 +141,7 @@ case 'chapter':
                         // can we actually go higher?
                         $max = $db->quick("SELECT MAX(`order`) FROM chapters");
                         if($chapter['order'] == $max) {
-                            continue;
+                            break;
                         }
 
                         // first: move the one next in the list up
@@ -153,7 +153,7 @@ case 'chapter':
                         break;
                     case 'down':
                         if($chapter['order'] == 0) {
-                            continue;
+                            break;
                         }
                         $db->query("UPDATE chapters SET `order` = %d WHERE `order` = %d",
                             array($chapter['order'], $chapter['order'] - 1));
